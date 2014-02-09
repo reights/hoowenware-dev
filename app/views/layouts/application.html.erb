@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hoowenware | Development</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+  <% flash.each do |key, value| %>
+  <div class='flash' id='<%= key %>'>
+    <%= value %>
+  </div>
+  <% end %>
+    <nav>
+    <% if current_user %>
+    	<span class='current_user'>
+        <%= link_to "Sign out #{current_user}", destroy_user_session_path, :method => :delete %>
+    	</span>
+    <% else %>
+      <ul>
+        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        <li><%= link_to "Sign in", new_user_session_path %></li>
+      </ul>
+    <% end %>
+    </nav>
+    <%= yield %>
+
+  </body>
+</html>
