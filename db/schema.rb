@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209013456) do
+ActiveRecord::Schema.define(version: 20140209192705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "trips", force: true do |t|
+    t.string   "title"
+    t.string   "hash_tag"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "location"
+    t.boolean  "is_private",     default: false
+    t.boolean  "hide_guestlist", default: false
+    t.boolean  "is_active",      default: true
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -36,6 +52,11 @@ ActiveRecord::Schema.define(version: 20140209013456) do
     t.string   "provider"
     t.string   "avatar"
     t.hstore   "oauth_cred"
+    t.string   "gender"
+    t.string   "zip_code"
+    t.string   "mobile_number"
+    t.string   "dietary_restrictions"
+    t.string   "roommate_preferences"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

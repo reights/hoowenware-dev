@@ -1,0 +1,21 @@
+<%= link_to 'Create An trip', new_trip_path %>
+<div class="row">
+  <ul>
+  	<% @trips.each do |trip| %>
+  		<% if trip.active? %>
+  			<li><%= link_to trip.name, trip %></li>
+  		<% end %>
+  	<% end %>
+  </ul>
+</div>
+
+<div class="row">
+  <% if current_user %>
+    <h4>Your cancelled trips</h4>
+    <% @trips.each do |trip| %>
+      <% if trip.active == false %>
+        <li><%= link_to trip.name, trip %></li>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
