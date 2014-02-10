@@ -1,5 +1,10 @@
-<%= link_to 'Create An trip', new_trip_path %>
-<div>
-  <h4>Active Trips</h4>
-  <%= render "active" %>
-</div>
+  <div>
+    <%= render "active" %>
+  </div>
+  <% if current_user && current_user.is_admin? %>
+  <hr />
+  <div>
+    <h4> Inactive Trips </h4>
+    <%= render "inactive" %>
+  </div>
+  <% end %>

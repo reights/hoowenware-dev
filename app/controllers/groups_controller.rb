@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
-  before_action :authorize_admin!, only: [:destroy]
-  before_action :set_group, only: [:show, :edit, :update, :cancel,
+  before_action :authorize_admin!, only: [:deactivate, :reactivate, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :deactivate,
                                     :reactivate, :destroy]
   before_filter :check_for_cancel, :only => [:create, :update]
 
@@ -18,10 +18,10 @@ class GroupsController < ApplicationController
 
     if @group.save
       @group.update(is_active: true)
-      flash[:notice] = "Your group has been created."
+      flash[:notice] = "This group has been created."
       redirect_to @group
     else
-      flash[:alert] = "Your group has not been created."
+      flash[:alert] = "This group has not been created."
       render "new"
     end
   end
@@ -37,36 +37,26 @@ class GroupsController < ApplicationController
   def update
     #set_group
     if @group.update(group_params)
-      flash[:notice] = "Your group has been updated."
+      flash[:notice] = "This group has been updated."
       redirect_to @group
     else
-      flash[:alert] = "Your group has not been updated."
+      flash[:alert] = "This group has not been updated."
       render "edit"
     end
   end
 
-  def cancel
-    if current_user == @group.user
-      @group.update(is_active: false)
-
-      flash[:notice] = "Your group has been cancelled."
-      redirect_to user_path(current_user.id)
-    else
-      flash[:alert] = "You must be an administrator of this group to do that."
-      redirect_to groups_path
-    end
+  def deactivate
+    @group.update(is_active: false)
+    flash[:notice] = "This group has been deactivated."
+    redirect_to groups_path
   end
 
   def reactivate
-    if current_user == @group.user
-      @group.update(is_active: true)
+    @group.update(is_active: true)
 
-      flash[:notice] = "Your group has been reactivated."
-      redirect_to user_path(current_user.id)
-    else
-      flash[:alert] = "You must be an administrator of this group to do that."
-      redirect_to groups_path
-    end
+    flash[:notice] = "This group has been reactivated."
+    redirect_to groups_path
+
   end
 
   def destroy

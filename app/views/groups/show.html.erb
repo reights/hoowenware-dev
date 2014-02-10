@@ -5,7 +5,7 @@
     <li><%= link_to "Settings", edit_group_path(@group) %></li>
     <li>
       <% if @group.is_active? %>
-        <%= link_to "Cancel this group", cancel_group_path(@group) %>
+        <%= link_to "Deactivate this group", deactivate_group_path(@group) %>
       <% else %>
         <%= link_to "Reactivate this group", reactivate_group_path(@group) %>
       <% end %>

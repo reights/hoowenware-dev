@@ -12,6 +12,6 @@ feature 'Creating A Group feature' do
     fill_in 'Group Name:', with: 'Test Group'
     click_link_or_button 'Create'
 
-    expect(page).to have_content('Your group has been created.')
+    expect(page).to have_content('This group has been created.')
   end
 end

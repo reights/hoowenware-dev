@@ -11,7 +11,7 @@ HoowenwareDev::Application.routes.draw do
 
   resources :groups do
     member do
-      get 'cancel'
+      get 'deactivate'
       get 'reactivate'
     end
   end

@@ -10,6 +10,15 @@
 require 'faker'
 
 User.destroy_all
+Trip.destroy_all
+Group.destroy_all
+
+User.create(:first_name => 'Hoowenware', 
+            :last_name => 'Admin', 
+            :email => 'admin@hoowenware.com',
+            :password => 'passw0rd',
+            :password_confirmation => 'passw0rd',
+            :is_admin => true)
 
 15.times do
   user = User.new
@@ -51,6 +60,13 @@ User.destroy_all
 
   trip.save!
 
+end
+
+groups = ['Kentucky Wildcats Alumn', 'Kansas Jayhawks Nation', 'Wine Country Lovers',
+          'Texas A&M 12th Men', 'Traveling Photographers', 'Start-Up Junkies' ]
+
+groups.each do |g|
+  Group.create :name => g
 end
 
 puts "Database seeded with test data."

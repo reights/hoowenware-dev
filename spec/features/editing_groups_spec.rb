@@ -13,6 +13,6 @@ feature 'Editing Groups' do
     fill_in 'Group Name:', with: 'Revised Group Name'
     click_button 'Update'
 
-    expect(page).to have_content('Your group has been updated')
+    expect(page).to have_content('This group has been updated')
   end
 end

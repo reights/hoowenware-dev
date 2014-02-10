@@ -1,5 +1,10 @@
-<%= link_to 'Create An Group', new_group_path %>
-<div>
-  <h4>Active Groups</h4>
-  <%= render "active" %>
-</div>
+  <div id="active_groups">
+    <%= render "active" %>
+  </div>
+  <% if current_user && current_user.is_admin? %>
+  <hr />
+  <div id="inactive_groups">
+    <h4> Inactive Groups </h4>
+    <%= render "inactive" %>
+  </div>
+  <% end %>
