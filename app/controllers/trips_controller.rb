@@ -1,8 +1,9 @@
 class TripsController < ApplicationController
   before_action :authorize_admin!, only: [:destroy]
   before_filter :authenticate_user!, except: [:show, :index]
-  before_action :set_trip, only: [:show, :edit, :update, :cancel, :reactivate, 
-                                  :destroy]
+  before_action :set_trip, only: [:show, :edit, :update, :cancel,
+                                  :reactivate, :destroy]
+  before_filter :check_for_cancel, :only => [:create, :update]
 
   def index
     @trips = Trip.order('start_date ASC')
@@ -77,6 +78,7 @@ class TripsController < ApplicationController
     redirect_to trips_path
   end
 
+
   private
     def trip_params
       params.require(:trip).permit(:title, :hash_tag, :start_date, :end_date, 
@@ -89,4 +91,12 @@ class TripsController < ApplicationController
      flash[:alert] = "The trip you were looking for could not be found."
      redirect_to trips_path
     end
+
+    def check_for_cancel
+      if params[:commit] == "Cancel"
+        flash[:notice] = "Your changes have been cancelled."
+        redirect_to @trip
+      end
+    end
+
 end

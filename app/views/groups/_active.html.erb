@@ -1,0 +1,8 @@
+  <% @groups.each do |group| %>
+    <% if group.is_active? %>
+      <div>
+        <%= link_to group.name, group %>
+      </div>
+    <% end %>
+    <br />
+  <% end %>

@@ -1,0 +1,29 @@
+  <%= form_for @group, html: {multipart: true, id: 'new_group_form' } do |f| %>
+    <% if @group.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:
+        </h4>
+        <ul>
+          <% @group.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :name, 'Group Name:' %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <div>
+        <% if @group.new_record? %>
+          <%= f.submit 'Create'%>
+        <% else %>
+          <%= f.submit 'Update'%>
+        <% end %>
+        <%= button_tag "Reset", type: :reset%>
+        <%= f.submit "Cancel"%>
+      </div>
+    </div>
+  <% end %>

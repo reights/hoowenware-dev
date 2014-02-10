@@ -42,13 +42,12 @@
     <div>
       <div>
         <% if @trip.new_record? %>
-          <%= f.submit 'Create', :class => 'button small radius success'%>
+          <%= f.submit 'Create'%>
         <% else %>
-          <%= f.submit 'Update', :class => 'button small radius success'%>
+          <%= f.submit 'Update'%>
         <% end %>
-        <%= button_tag "Cancel",
-                      type: :reset,
-                      :id => "cancel_new_trip_btn"%>
+        <%= button_tag "Reset", type: :reset%>
+        <%= f.submit "Cancel"%>
       </div>
     </div>
   <% end %>

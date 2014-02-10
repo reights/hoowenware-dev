@@ -77,10 +77,9 @@
      <div>
 
         <%= f.submit 'Update'%>
-        <%= button_tag "Skip",
-                      type: :reset, 
-                      :class => "button small radius alert", 
-                      :id => "cancel_new_trip_btn"%>
+        <%= button_tag "Reset", type: :reset%>
+        <!-- <%= button_tag "Skip", type: :reset %> -->
+        <%= f.submit "Cancel"%>
     </div>
 
   <% end %>

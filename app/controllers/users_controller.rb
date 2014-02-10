@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_filter :check_for_cancel, :only => [:update]
 
   def show
     #set_user
@@ -33,5 +34,12 @@ class UsersController < ApplicationController
    rescue ActiveRecord::RecordNotFound
      flash[:alert] = "The profile you were looking for could not be found."
      redirect_to root_path
+    end
+
+    def check_for_cancel
+      if params[:commit] == "Cancel"
+        flash[:notice] = "Your changes have been cancelled."
+        redirect_to @user
+      end
     end
 end

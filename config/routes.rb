@@ -8,5 +8,13 @@ HoowenwareDev::Application.routes.draw do
       get 'reactivate'
     end
   end
+
+  resources :groups do
+    member do
+      get 'cancel'
+      get 'reactivate'
+    end
+  end
+  
   resources :users, only: [:show, :edit, :update]
 end
