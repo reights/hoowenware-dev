@@ -51,7 +51,7 @@ gem 'rails_12factor', group: :production
 
 group :test, :development do
   gem 'rspec-rails', "~> 2.14"
-  gem 'dotenv-rails'
+  gem 'faker'
 end
 
 group :test do

@@ -1,4 +1,4 @@
-  <%= form_for @trip, html: { 'data-abide'=> 'ajax', multipart: true, id: 'new_trip_form' } do |f| %>
+  <%= form_for @trip, html: {multipart: true, id: 'new_trip_form' } do |f| %>
     <% if @trip.errors.any? %>
       <div id="error_explanation">
         <h4>
