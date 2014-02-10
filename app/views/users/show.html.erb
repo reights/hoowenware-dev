@@ -1,4 +1,13 @@
 <div>
   <%= link_to (image_tag @user.avatar), edit_user_path(@user.id) %>
-  <%= @user %>
 </div>
+<div>
+  <p>
+    <%= @user %>, <%= @user.email %>
+  </p>
+</div>
+<div>
+  <%= @user.zip_code %>
+</div>
+<hr />
+<%= link_to "Edit", edit_user_path(@user) %>

@@ -1,5 +1,8 @@
-<h3>Latest Trips</h3>
-<%= link_to "Create a Trip", new_trip_path %>
+<h3>Latest Trips
+  <small>(<%= link_to "Create a Trip", new_trip_path %>)</small>
+</h3>
+
+
 <div>
   <% @trips.each do |trip| %>
     <% if trip.is_active? %>
@@ -15,5 +18,10 @@
     <%= trip.location %>
     </div>
     <% end %>
+    <br />
   <% end %>
+</div>
+<hr />
+<div>
+  <%= link_to "More Trips", trips_path %>
 </div>

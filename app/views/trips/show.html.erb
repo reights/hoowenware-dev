@@ -2,7 +2,7 @@
   <div id="trip">
   <h4><%= @trip.title %> (<%= @trip.hash_tag %>)</h4>
   <span class='creator'>
-    Planned by <%= @trip.user %>
+    Planned by <%= link_to @trip.user, @trip.user %>
   </span>
   <p class='location'>(<%= @trip.location %>)</p>
   <p class='dates'>

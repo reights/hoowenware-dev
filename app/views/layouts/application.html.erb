@@ -13,20 +13,20 @@
   </div>
   <% end %>
     <nav>
-    <% if current_user %>
-    	<span class='current_user'>
-        <%= link_to "Sign out #{current_user}", destroy_user_session_path, :method => :delete %>
-    	</span>
-      <span class="profile_link">
-         <%= link_to "Profile", current_user %>
-      </span>
-    <% else %>
-      <ul>
-        <li><%= link_to 'Sign up', new_user_registration_path %></li>
-        <li><%= link_to "Sign in", new_user_session_path %></li>
-      </ul>
-    <% end %>
+      <% if current_user %>
+        Welcome, <%= link_to current_user, current_user %> 
+        | 
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <% else %>
+      <%= link_to 'Sign up', new_user_registration_path %>
+      |
+      <%= link_to "Sign in", new_user_session_path %>
+      <% end %>
+      <% if ! @home_page %>
+        | <%= link_to "Home", root_path %>
+      <% end %>
     </nav>
+    <hr />
     <%= yield %>
 
   </body>

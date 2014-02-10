@@ -20,5 +20,11 @@
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
+<hr />
+<p>
+  Or sign in with:<br />
+  <%= link_to "Facebook", user_omniauth_authorize_path(:facebook) %>
+  <%= link_to "Google", user_omniauth_authorize_path(:google_oauth2) %>
+</p>
 
-<%= render "devise/shared/links" %>
+<!-- <%= render "devise/shared/links" %> -->
