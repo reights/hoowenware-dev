@@ -1,4 +1,5 @@
 <h3>Latest Trips</h3>
+<%= link_to "Create a Trip", new_trip_path %>
 <div>
   <% @trips.each do |trip| %>
     <% if trip.is_active? %>

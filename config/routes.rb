@@ -6,4 +6,5 @@ HoowenwareDev::Application.routes.draw do
     get :cancel
     get :reactivate
   end
+  resources :users, only: [:show, :edit, :update]
 end

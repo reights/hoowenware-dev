@@ -1,0 +1,86 @@
+  <%= form_for @user, url: user_path(@user), html: { multipart: true, id: 'edit_user_form' } do |f| %>
+   <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
+        </h4>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :email, 'Email:' %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div>
+      <%= f.label :first_name, 'First Name:' %>
+      <%= f.text_field :first_name, :required => '' %>
+    </div>
+
+    <div>
+      <%= f.label :last_name, 'Last Name:' %>
+      <%= f.text_field :last_name, :required => '' %>
+    </div>
+
+    <div>
+      <%= f.label :gender, 'Gender:' %>
+      <%= f.select :gender, [['',''], ['male', 'male'], ['female', 'female'], ['transgender', 'transgender']] %>
+    </div>
+
+    <div>
+      <%= f.label :status, 'Status:' %>
+      <%= f.select :status, [['',''], ['single', 'single'], ['married', 'married'],
+                            ['divorced', 'divorced'], ['involved', 'involved']] %>
+    </div>
+
+<!--     <div>
+      <label>Add Photo:</label>
+      <%= image_tag @user.avatar, :class => 'edit_profile_img' %>
+      <input type="file" name="photo" id="file" class="upload_img_browse_btn">
+    </div> -->
+
+    <div>
+      <%= f.label :zip_code, 'Zip Code:' %>
+      <%= f.text_field :zip_code %>
+    </div>
+
+    <div>
+      <%= f.label :mobile_number, 'Mobile No:' %>
+      <%= f.text_field :mobile_number %>
+    </div>
+
+    <div>
+      <%= f.label :skype_id, 'Skype ID:' %>
+      <%= f.text_field :skype_id %>
+    </div>
+
+    <div>
+      <%= f.label :dietary_pref, 'Dietary Preferences:' %>
+      <%= f.select :dietary_pref, [['none', 'none'], ['vegan', 'vegan'], ['kosher', 'kosher'],
+                                ['vegitarian', 'vegitarian'],['allergnic-free', 'allergnic-free'],
+                                ['gluten / casein free', 'gluten / casein free'],
+                                ['other', 'other']] %>
+    </div>
+
+
+    <div>
+      <%= f.label :roommate_pref, 'Roommate Preferences:' %>
+      <%= f.select :roommate_pref, [['none', 'none'], ['single female', 'single female'],
+                                    ['single male', 'single male'], ['group females', 'group females'],
+                                    ['group males', 'group males']] %>
+    </div>
+
+     <div>
+
+        <%= f.submit 'Update'%>
+        <%= button_tag "Skip",
+                      type: :reset, 
+                      :class => "button small radius alert", 
+                      :id => "cancel_new_trip_btn"%>
+    </div>
+
+  <% end %>

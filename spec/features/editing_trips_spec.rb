@@ -17,7 +17,10 @@ feature 'Editing Trips feature' do
 		click_link 'Settings'
 
 		fill_in 'Trip Title:', with: 'Revised Trip Title'
-		
+		fill_in 'Start', with: '03/08/2013'
+		fill_in 'End', with: '03/10/2013'
+		select 'public', from: 'Privacy'
+
 		click_button 'Update'
 
 		expect(page).to have_content('Your trip has been updated')
