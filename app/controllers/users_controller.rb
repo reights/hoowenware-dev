@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     #set_user
+    @trips = Trip.where(user_id: @user.id)
   end
 
   def edit

@@ -1,21 +1,5 @@
 <%= link_to 'Create An trip', new_trip_path %>
-<div class="row">
-  <ul>
-  	<% @trips.each do |trip| %>
-  		<% if trip.is_active? %>
-  			<li><%= link_to trip.title, trip %></li>
-  		<% end %>
-  	<% end %>
-  </ul>
-</div>
-
-<div class="row">
-  <% if current_user %>
-    <h4>Your cancelled trips</h4>
-    <% @trips.each do |trip| %>
-      <% if trip.is_active == false %>
-        <li><%= link_to trip.title, trip %></li>
-      <% end %>
-    <% end %>
-  <% end %>
+<div>
+  <h4>Active Trips</h3>
+  <%= render "trips/active" %>
 </div>

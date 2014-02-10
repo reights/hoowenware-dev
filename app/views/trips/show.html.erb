@@ -11,13 +11,15 @@
 
   <ul>
     <li><%= link_to "Settings", edit_trip_path(@trip) %></li>
+    <% if current_user == @trip.user %>
     <li>
-    <% if @trip.is_active? %>
-      <%= link_to "Cancel this trip", trip_cancel_path(trip_id: @trip.id) %>
-    <% else %>
-      <%= link_to "Reactivate this trip", trip_reactivate_path(trip_id: @trip.id) %>
-    <% end %>
+      <% if @trip.is_active? %>
+        <%= link_to "Cancel this trip", cancel_trip_path(@trip) %>
+      <% else %>
+        <%= link_to "Reactivate this trip", reactivate_trip_path(@trip) %>
+      <% end %>
     </li>
+    <% end %>
     <% if current_user.is_admin? %>
     <li>
         <%= link_to "Delete This trip",

@@ -3,8 +3,10 @@ HoowenwareDev::Application.routes.draw do
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :trips do    
-    get :cancel
-    get :reactivate
+    member do
+      get 'cancel'
+      get 'reactivate'
+    end
   end
   resources :users, only: [:show, :edit, :update]
 end

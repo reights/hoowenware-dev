@@ -7,7 +7,18 @@
   </p>
 </div>
 <div>
-  <%= @user.zip_code %>
+  <p>Lives in:<%= @user.zip_code %></p>
+  <p><%= link_to "Edit Your Profile", edit_user_path(@user) %></p>
 </div>
 <hr />
-<%= link_to "Edit", edit_user_path(@user) %>
+<% if @trips.length > 0 %>
+  <h4> Your Trips</h3>
+  <div id="active_trips">
+    <strong>Active</strong>
+    <%= render "trips/active" %>
+  </div>
+  <div id="cancelled_trips">
+    <strong>Cancelled</strong>
+    <%= render "trips/inactive" %>
+  </div>
+<% end %>

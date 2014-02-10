@@ -13,7 +13,7 @@
     <% end %>
     <div>
       <%= f.label :title, 'Trip Title:' %>
-      <%= f.text_field :title, :required => true %>
+      <%= f.text_field :title %>
     </div>
     <div>
       <%= f.label :hash_tag, 'Hashtag:' %>
@@ -21,15 +21,15 @@
     </div>
     <div>
       <%= f.label :start_date, 'Start:' %>
-      <%= f.text_field :start_date, :required => true %>
+      <%= f.text_field :start_date %>
     </div>
     <div>
       <%= f.label :end_date, 'End:' %>
-      <%= f.text_field :end_date, :required => true %>
+      <%= f.text_field :end_date %>
     </div>
     <div>
       <%= f.label :location, 'Location:' %>
-      <%= f.text_field :location, :required => true %>
+      <%= f.text_field :location %>
     </div>
     <div>
       <%= f.label :is_private, 'Privacy:' %>
@@ -47,8 +47,7 @@
           <%= f.submit 'Update', :class => 'button small radius success'%>
         <% end %>
         <%= button_tag "Cancel",
-                      type: :reset, 
-                      :class => "button small radius alert", 
+                      type: :reset,
                       :id => "cancel_new_trip_btn"%>
       </div>
     </div>

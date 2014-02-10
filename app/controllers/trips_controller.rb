@@ -1,7 +1,8 @@
 class TripsController < ApplicationController
   before_action :authorize_admin!, only: [:destroy]
   before_filter :authenticate_user!, except: [:show, :index]
-  before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :set_trip, only: [:show, :edit, :update, :cancel, :reactivate, 
+                                  :destroy]
 
   def index
     @trips = Trip.order('start_date ASC')
@@ -45,19 +46,27 @@ class TripsController < ApplicationController
   end
 
   def cancel
-    @trip = Trip.find params[:trip_id]
-    @trip.update(is_active: false)
+    if current_user == @trip.user
+      @trip.update(is_active: false)
 
-    flash[:notice] = "Your trip has been cancelled."
-    redirect_to trips_path
+      flash[:notice] = "Your trip has been cancelled."
+      redirect_to user_path(current_user.id)
+    else
+      flash[:alert] = "You must be an administrator of this trip to do that."
+      redirect_to trips_path
+    end
   end
 
   def reactivate
-    @trip = Trip.find params[:trip_id]
-    @trip.update(is_active: true)
+    if current_user == @trip.user
+      @trip.update(is_active: true)
 
-    flash[:notice] = "Your trip has been reinstated."
-    redirect_to trips_path
+      flash[:notice] = "Your trip has been reactivated."
+      redirect_to user_path(current_user.id)
+    else
+      flash[:alert] = "You must be an administrator of this trip to do that."
+      redirect_to trips_path
+    end
   end
 
   def destroy
