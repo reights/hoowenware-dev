@@ -15,6 +15,7 @@ class TripsController < ApplicationController
     @trip.user = current_user
 
     if @trip.save
+      @trip.update(is_active: true)
       flash[:notice] = "Your trip has been created."
       redirect_to @trip
     else
@@ -34,7 +35,6 @@ class TripsController < ApplicationController
   def update
     #set_trip
     if @trip.update(trip_params)
-      @trip.update(active: true)
       flash[:notice] = "Your trip has been updated."
       redirect_to @trip
     else
@@ -45,7 +45,7 @@ class TripsController < ApplicationController
 
   def cancel
     @trip = Trip.find params[:trip_id]
-    @trip.update(active: false)
+    @trip.update(is_active: false)
 
     flash[:notice] = "Your trip has been cancelled."
     redirect_to trips_path
@@ -53,7 +53,7 @@ class TripsController < ApplicationController
 
   def reactivate
     @trip = Trip.find params[:trip_id]
-    @trip.update(active: true)
+    @trip.update(is_active: true)
 
     flash[:notice] = "Your trip has been reinstated."
     redirect_to trips_path
