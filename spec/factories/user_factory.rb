@@ -11,7 +11,7 @@ FactoryGirl.define do
 		password_confirmation 'passw0rd'
 
 		factory :admin_user do
-			admin true
+			is_admin true
 		end
 	end
 end

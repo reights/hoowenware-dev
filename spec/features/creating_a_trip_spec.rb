@@ -9,7 +9,7 @@ feature 'Creating Trips' do
     message = "You need to sign in or sign up before continuing."
     expect(page).to have_content(message)
 
-    within '#new_user' do
+    within '#sign_in_form' do
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password
     end

@@ -11,6 +11,7 @@
 
   <ul>
     <li><%= link_to "Settings", edit_trip_path(@trip) %></li>
+    <% if current_user.is_admin? %>
     <li>
         <%= link_to "Delete This trip",
               trip_path(@trip),
@@ -19,4 +20,5 @@
                       "Are you sure you want to cancel this trip?"
                     }%>
     </li>
+    <% end %>
   </div>

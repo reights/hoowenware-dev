@@ -6,8 +6,6 @@ feature 'Social OAuth Authentication feature' do
 
   before do
     OmniAuth.config.test_mode = true
-    visit '/'
-    click_link 'Sign in'
   end
 
 
@@ -25,7 +23,7 @@ feature 'Social OAuth Authentication feature' do
     
     first_name = OmniAuth.config.mock_auth[:facebook][:info][:first_name]
 
-    click_link 'Sign in with Facebook'
+    visit '/users/auth/facebook'
 
     expect(page).to have_content 'Successfully authenticated from Facebook account.'
     expect(page).to have_content "#{first_name}"
@@ -44,7 +42,7 @@ feature 'Social OAuth Authentication feature' do
 
     first_name = OmniAuth.config.mock_auth[:twitter][:info][:name].split(' ')[0]
 
-    click_link 'Sign in with Twitter'
+    visit '/users/auth/twitter'
 
     expect(page).to have_content 'Successfully authenticated from Twitter account.'
     expect(page).to have_content "#{first_name}"
@@ -64,7 +62,7 @@ feature 'Social OAuth Authentication feature' do
 
     first_name = OmniAuth.config.mock_auth[:linkedin][:info][:first_name]
 
-    click_link 'Sign in with Linkedin'
+    visit '/users/auth/linkedin'
 
     expect(page).to have_content 'Successfully authenticated from Linkedin account.'
     expect(page).to have_content "#{first_name}"
@@ -83,7 +81,7 @@ feature 'Social OAuth Authentication feature' do
 
     first_name = OmniAuth.config.mock_auth[:google_oauth2][:info][:name].split(' ')[0]
 
-    click_link 'Sign in with Google'
+    visit '/users/auth/google_oauth2'
 
     expect(page).to have_content 'Successfully authenticated from Google account.'
     expect(page).to have_content "#{first_name}"
@@ -107,13 +105,13 @@ feature 'Social OAuth Authentication feature' do
     data = OmniAuth.config.mock_auth[:yahoo][:extra][:raw_info]
     first_name = data[:uid]
 
-    click_link 'Sign in with Yahoo'
+    visit '/users/auth/yahoo'
 
     expect(page).to have_content 'Successfully authenticated from Yahoo account.'
     expect(page).to have_content "#{first_name}"
   end
 
-  scenario "Sign in with Windowsive" do
+  scenario "Sign in with WindowsLive" do
     OmniAuth.config.mock_auth[:windowslive] = OmniAuth::AuthHash.new({
       provider: 'windowslive',
       uid: 'w_123545',
@@ -126,7 +124,7 @@ feature 'Social OAuth Authentication feature' do
     data = OmniAuth.config.mock_auth[:windowslive]
     first_name = data[:info][:name].split(' ')[0]
 
-    click_link 'Sign in with Windowslive'
+    visit '/users/auth/Windowslive'
 
     expect(page).to have_content 'Successfully authenticated from WindowsLive account.'
     expect(page).to have_content "#{first_name}"
@@ -144,7 +142,7 @@ feature 'Social OAuth Authentication feature' do
 
     first_name = OmniAuth.config.mock_auth[:github][:info][:name].split(' ')[0]
 
-    click_link 'Sign in with Github'
+    visit '/users/auth/github'
 
     expect(page).to have_content 'Successfully authenticated from Github account.'
     expect(page).to have_content "#{first_name}"
@@ -162,7 +160,7 @@ feature 'Social OAuth Authentication feature' do
 
     first_name = OmniAuth.config.mock_auth[:meetup][:info][:name].split(' ')[0]
 
-    click_link 'Sign in with Meetup'
+    visit '/users/auth/meetup'
 
     expect(page).to have_content 'Successfully authenticated from Meetup account.'
     expect(page).to have_content "#{first_name}"
@@ -180,7 +178,7 @@ feature 'Social OAuth Authentication feature' do
     })
     first_name = OmniAuth.config.mock_auth[:dropbox][:info][:name].split(' ')[0]
 
-    click_link 'Sign in with Dropbox'
+    visit '/users/auth/dropbox'
 
     expect(page).to have_content 'Successfully authenticated from Dropbox account.'
     expect(page).to have_content "#{first_name}"

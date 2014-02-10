@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_action :authorize_admin!, only: [:destroy]
   before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
