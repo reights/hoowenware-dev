@@ -31,6 +31,7 @@ end
 gem 'unicorn'
 gem 'devise'
 gem 'american_date'
+gem 'faker'
 
 gem 'omniauth-facebook', '~> 1.5.1'
 gem 'omniauth-twitter', '~> 1.0.1'
@@ -52,7 +53,6 @@ gem 'rails_12factor', group: :production
 
 group :test, :development do
   gem 'rspec-rails', "~> 2.14"
-  gem 'faker'
 end
 
 group :test do
