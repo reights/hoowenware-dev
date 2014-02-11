@@ -1,5 +1,6 @@
 class Membership < ActiveRecord::Base
   validates :email, presence: true
+   validates_uniqueness_of :email, :scope => :group_id
 
   belongs_to :groups
   has_many :users

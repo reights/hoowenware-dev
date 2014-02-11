@@ -19,8 +19,8 @@ class MembershipsController < ApplicationController
         flash[:notice] = "Member has been added to this group."
         redirect_to group_path(@group)
       else
-        flash[:alert] = "Member has not been added to this group."
-        render "new"
+        flash[:alert] = "Duplicate members cannot be added to group."
+        redirect_to group_path(@group)
       end
     else
       flash[:notice] = "You must be a group admin to do that."
