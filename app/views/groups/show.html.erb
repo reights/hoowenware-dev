@@ -3,7 +3,8 @@
   <h4><%= @group.name %></h4>
 
   <strong>Members:</strong>
-    <%if @group_admin or current_user.is_admin? %>
+  <%if user_signed_in? %>
+    <% if  @group_admin or current_user.is_admin? %>
     <div>
       <%= render "memberships/form" %>
     </div>
@@ -11,25 +12,26 @@
     <div>
       <%= render "memberships/active" %>
     </div>
-
+  <% end %>
   <hr />
-
-  <%if @group_admin or current_user.is_admin? %>
-    <%= link_to "Settings", edit_group_path(@group) %>
-    <% if @group.is_active? %>
-      <%= link_to "Deactivate this group", deactivate_group_path(@group) %>
-    <% else %>
-      <%= link_to "Reactivate this group", reactivate_group_path(@group) %>
-    <% end %>
-      
-    <% if current_user && current_user.is_admin? %>
-      <%= link_to "Delete This group",
-                group_path(@group),
-                method: :delete,
-                data: { confirm:
-                        "Are you sure you want to cancel this group?"
-                      }
-      %>
+  <%if user_signed_in? %>
+    <% if  @group_admin or current_user.is_admin? %>
+      <%= link_to "Settings", edit_group_path(@group) %>
+      <% if @group.is_active? %>
+        <%= link_to "Deactivate this group", deactivate_group_path(@group) %>
+      <% else %>
+        <%= link_to "Reactivate this group", reactivate_group_path(@group) %>
+      <% end %>
+        
+      <% if current_user && current_user.is_admin? %>
+        <%= link_to "Delete This group",
+                  group_path(@group),
+                  method: :delete,
+                  data: { confirm:
+                          "Are you sure you want to cancel this group?"
+                        }
+        %>
+      <% end %>
     <% end %>
   <% end %>
   </div>

@@ -13,12 +13,13 @@ User.destroy_all
 Trip.destroy_all
 Group.destroy_all
 
-# User.create(:first_name => 'Hoowenware', 
-#             :last_name => 'Admin', 
-#             :email => 'admin@hoowenware.com',
-#             :password => 'passw0rd',
-#             :password_confirmation => 'passw0rd',
-#             :is_admin => true)
+# Dev admin
+User.create(:first_name => 'Hoowenware', 
+            :last_name => 'Admin', 
+            :email => 'admin@hoowenware.com',
+            :password => 'passw0rd',
+            :password_confirmation => 'passw0rd',
+            :is_admin => true)
 
 15.times do
   user = User.new
