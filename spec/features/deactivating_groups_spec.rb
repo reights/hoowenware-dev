@@ -8,7 +8,6 @@ feature 'Deactivating Groups feature' do
   let!(:group) { FactoryGirl.create(:group) }
 
   before do
-
   end
 
   scenario 'deactivating a group is allowed by admin user' do

@@ -1,23 +1,35 @@
   <% page_title(@group.name, "Groups") %>
   <div id="group">
   <h4><%= @group.name %></h4>
-  <ul>
-    <li><%= link_to "Settings", edit_group_path(@group) %></li>
-    <li>
-      <% if @group.is_active? %>
-        <%= link_to "Deactivate this group", deactivate_group_path(@group) %>
-      <% else %>
-        <%= link_to "Reactivate this group", reactivate_group_path(@group) %>
-      <% end %>
-    </li>
-    <% if current_user && current_user.is_admin? %>
-    <li>
-        <%= link_to "Delete This group",
-              group_path(@group),
-              method: :delete,
-              data: { confirm:
-                      "Are you sure you want to cancel this group?"
-                    }%>
-    </li>
+
+  <strong>Members:</strong>
+    <%if @group_admin or current_user.is_admin? %>
+    <div>
+      <%= render "memberships/form" %>
+    </div>
     <% end %>
+    <div>
+      <%= render "memberships/active" %>
+    </div>
+
+  <hr />
+
+  <%if @group_admin or current_user.is_admin? %>
+    <%= link_to "Settings", edit_group_path(@group) %>
+    <% if @group.is_active? %>
+      <%= link_to "Deactivate this group", deactivate_group_path(@group) %>
+    <% else %>
+      <%= link_to "Reactivate this group", reactivate_group_path(@group) %>
+    <% end %>
+      
+    <% if current_user && current_user.is_admin? %>
+      <%= link_to "Delete This group",
+                group_path(@group),
+                method: :delete,
+                data: { confirm:
+                        "Are you sure you want to cancel this group?"
+                      }
+      %>
+    <% end %>
+  <% end %>
   </div>

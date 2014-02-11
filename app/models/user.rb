@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
                                                 :google_oauth2, :yahoo, :windowslive,
                                                 :github, :meetup, :dropbox]
 
-
+  has_many :permissions
+  
   def to_s
     "#{first_name} #{last_name}"
   end

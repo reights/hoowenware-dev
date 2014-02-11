@@ -1,24 +1,24 @@
-<div>
-  <%= link_to (image_tag @user.avatar), edit_user_path(@user.id) %>
-</div>
-<div>
-  <p>
-    <%= @user %>, <%= @user.email %>
-  </p>
-</div>
-<div>
-  <p>Lives in:<%= @user.zip_code %></p>
-  <p><%= link_to "Edit Your Profile", edit_user_path(@user) %></p>
-</div>
-<hr />
-<% if @trips.length > 0 %>
-  <h4> Your Trips</h3>
-  <div id="active_trips">
-    <strong>Active</strong>
-    <%= render "trips/active" %>
+  <div>
+    <%= link_to (image_tag @user.avatar), edit_user_path(@user.id) %>
   </div>
-  <div id="cancelled_trips">
-    <strong>Cancelled</strong>
-    <%= render "trips/inactive" %>
+  <div>
+    <p>
+      <%= @user %>, <%= @user.email %>
+    </p>
   </div>
-<% end %>
+  <div>
+    <p>Lives in:<%= @user.zip_code %></p>
+    <p><%= link_to "Edit Your Profile", edit_user_path(@user) %></p>
+  </div>
+  <hr />
+  <% if @trips.length > 0 %>
+    <h4> Your Trips</h4>
+    <div id="active_trips">
+      <strong>Active</strong>
+      <%= render "trips/active" %>
+    </div>
+    <div id="cancelled_trips">
+      <strong>Cancelled</strong>
+      <%= render "trips/inactive" %>
+    </div>
+  <% end %>

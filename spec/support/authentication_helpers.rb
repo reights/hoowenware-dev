@@ -15,7 +15,7 @@ module AuthenticationHelpers
 end
 
 module AuthHelpers
-	def sign_in(user)
+	def log_in(user)
 		session[:user_id] = user.id
 	end
 end

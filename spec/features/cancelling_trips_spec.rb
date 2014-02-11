@@ -8,7 +8,6 @@ feature 'Canceling Trips feature' do
 	let!(:trip) { FactoryGirl.create(:trip, user: user) }
 
 	before do
-
 	end
 
 	scenario 'cancelling an trip is allowed by trip owner' do

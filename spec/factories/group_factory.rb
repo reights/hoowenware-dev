@@ -1,4 +1,4 @@
-# grouo factory for integration testing
+# group factory for integration testing
 
 FactoryGirl.define do
   sequence(:name) {|n| "An Example Group ##{n}"}

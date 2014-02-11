@@ -32,6 +32,7 @@ gem 'unicorn'
 gem 'devise'
 gem 'american_date'
 gem 'faker'
+gem 'cancan'
 
 gem 'omniauth-facebook', '~> 1.5.1'
 gem 'omniauth-twitter', '~> 1.0.1'

@@ -1,0 +1,17 @@
+  <%= form_for [@group, @membership], html: {id: 'add_group_member'} do |f| %>
+    <% if @membership.errors.any? %>
+    <div id="error_explanation">
+      <h4>
+        <%= pluralize(@membership.errors.count, "error") %> prohibited this member from being added:
+      </h4>
+      <ul>
+        <% @membership.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <%= f.label :email, 'Email:' %>
+    <%= f.text_field :email %>
+    <%= f.submit 'Add Member' %>
+  <% end %>

@@ -1,8 +1,10 @@
 class GroupsController < ApplicationController
   before_action :authorize_admin!, only: [:deactivate, :reactivate, :destroy]
+  before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_group, only: [:show, :edit, :update, :deactivate,
                                     :reactivate, :destroy]
   before_filter :check_for_cancel, :only => [:create, :update]
+  before_action :authorize_update!, only: [:edit, :update]
 
 
   def index
@@ -11,12 +13,15 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
+
   end
 
   def create
     @group = Group.new(group_params)
-
     if @group.save
+      @membership = @group.memberships.build(email: current_user.email,
+                                            is_admin: true,
+                                            is_active: true)
       @group.update(is_active: true)
       flash[:notice] = "This group has been created."
       redirect_to @group
@@ -28,6 +33,9 @@ class GroupsController < ApplicationController
 
   def show
     #set_group
+    @membership = @group.memberships.build
+    @memberships = Membership.where(group_id: @group.id)
+    @group_admin = is_group_admin?(current_user)
   end
 
   def edit
@@ -74,15 +82,32 @@ class GroupsController < ApplicationController
 
     def set_group
       @group = Group.find(params[:id])
-   rescue ActiveRecord::RecordNotFound
-     flash[:alert] = "The group you were looking for could not be found."
-     redirect_to groups_path
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The group you were looking for could not be found."
+      redirect_to groups_path
     end
 
     def check_for_cancel
       if params[:commit] == "Cancel"
         flash[:notice] = "Your changes have been cancelled."
         redirect_to @group
+      end
+    end
+    def is_group_admin?(user)
+      if user
+        if @group.memberships.find_by(:email => user.email, :is_admin => true)
+          return true
+        end
+      end
+      return false
+    end
+
+    def authorize_update!
+      if !current_user.is_admin? && !is_group_admin?(current_user) && cannot?("edit groups".to_sym, @group)
+        if !is_group_admin?(current_user)
+          flash[:alert] = "You cannot edit memberships on this group."
+          redirect_to group_path(@group)
+        end
       end
     end
 end

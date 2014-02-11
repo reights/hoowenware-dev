@@ -1,7 +1,8 @@
-class Group < ActiveRecord::Base
-  validates :name, presence: true
+class Membership < ActiveRecord::Base
+  validates :email, presence: true
 
-  has_many :memberships
+  belongs_to :groups
+  has_many :users
   has_many :permissions, as: :thing
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
