@@ -7,4 +7,9 @@ class Membership < ActiveRecord::Base
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
   end
+
+  def get_user
+    @user = User.find_by(:email=> self.email)
+    return @user
+  end
 end

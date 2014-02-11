@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def self.find_for_facebook_oauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider   = auth.provider
