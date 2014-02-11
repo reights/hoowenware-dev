@@ -21,7 +21,8 @@ User.create(:first_name => 'Hoowenware',
             :password_confirmation => 'passw0rd',
             :is_admin => true)
 
-15.times do
+# Users and Trips
+30.times do
   user = User.new
   user.first_name = Faker::Name.first_name
   user.last_name = Faker::Name.last_name
@@ -60,14 +61,44 @@ User.create(:first_name => 'Hoowenware',
   trip.user_id = user.id
 
   trip.save!
-
 end
 
-groups = ['Kentucky Wildcats Alumn', 'Kansas Jayhawks Nation', 'Wine Country Lovers',
-          'Texas A&M 12th Men', 'Traveling Photographers', 'Start-Up Junkies' ]
-
+# Groups
+groups = ['Kentucky U. Wildcats Alumn', 'Doctors Without Borders', 'Wine Country Lovers',
+          'Traveling Photographers', 'Start-Up Junkies' ]
 groups.each do |g|
-  Group.create :name => g
+  Group.create name: g
 end
+
+
+# Memberships
+def add_members_to(group, users, starting_index=0)
+  count = starting_index
+  group_limit = (users.length/group.length)
+  group.each_with_index do |group, index|
+    member = count
+    last = (index + 1) * group_limit
+    Membership.create(group_id: group.id, email: users[member].email, 
+                          is_active: true, is_admin: true)
+    loop do
+      count += 1
+      member = count
+      if count % (group_limit + 1) == 0
+        Membership.create(group_id: group.id, email: users[member].email, 
+                          is_active: true, is_admin: true)
+      else
+        Membership.create(group_id: group.id, email: users[member].email, 
+                          is_active: true, is_admin: false)
+      end
+      break if count == last
+    end
+    count = last + 1
+  end
+end
+
+
+dev_users = User.all
+dev_groups = Group.all
+add_members_to(dev_groups, dev_users, 1)
 
 puts "Database seeded with test data."

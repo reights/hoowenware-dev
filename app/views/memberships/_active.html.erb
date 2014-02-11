@@ -3,44 +3,48 @@
   <div class="member">
     <% if member.is_active?%>
       <%= member.email %>
-      <%if user_signed_in? and  @group_admin and member.email != current_user.email or current_user.is_admin? %>
-        <% if member.is_active?%>
-        | <%= link_to "deactivate", group_pend_membership_path(@group, member.email) %>
-        <% else %>
-        | <%= link_to "approve", group_approve_membership_path(@group.id, member.email) %>
+      <%if user_signed_in? %> 
+        <% if @group_admin and member.email != current_user.email or current_user.is_admin? %>
+          <% if member.is_active?%>
+          | <%= link_to "deactivate", group_pend_membership_path(@group, member.email) %>
+          <% else %>
+          | <%= link_to "approve", group_approve_membership_path(@group.id, member.email) %>
+          <% end %>
+          <% if member.is_admin? %>
+          | <%= link_to "demote", group_demote_membership_path(@group, member.email) %>
+          <% else %>
+          | <%= link_to "promote", group_promote_membership_path(@group, member.email) %>
+          <% end %>
+          | <%= link_to "remove", group_remove_membership_path(@group, member.email),
+                        method: :delete,
+                        data: { confirm:
+                                "Are you sure you want to remove member from this group?"
+                              }
+            %>
         <% end %>
-        <% if member.is_admin? %>
-        | <%= link_to "demote", group_demote_membership_path(@group, member.email) %>
-        <% else %>
-        | <%= link_to "promote", group_promote_membership_path(@group, member.email) %>
-        <% end %>
-        | <%= link_to "remove", group_remove_membership_path(@group, member.email),
-                      method: :delete,
-                      data: { confirm:
-                              "Are you sure you want to remove member from this group?"
-                            }
-          %>
       <% end %>
     <% else %>
-      <%if user_signed_in? and @group_admin or current_user.is_admin? %>
-        <%= member.email %>
-        <%if user_signed_in? and @group_admin && member.email != current_user.email or current_user.is_admin? %>
-        <% if member.is_active?%>
-        | <%= link_to "deactivate", group_pend_membership_path(@group, member.email) %>
-        <% else %>
-        | <%= link_to "approve", group_approve_membership_path(@group.id, member.email) %>
-        <% end %>
-        <% if member.is_admin? %>
-        | <%= link_to "demote", group_demote_membership_path(@group, member.email) %>
-        <% else %>
-        | <%= link_to "promote", group_promote_membership_path(@group, member.email) %>
-        <% end %>
-        | <%= link_to "remove", group_remove_membership_path(@group, member.email),
-                      method: :delete,
-                      data: { confirm:
-                              "Are you sure you want to remove member from this group?"
-                            }
-          %>
+      <%if user_signed_in? %> 
+        <% if @group_admin and member.email != current_user.email or current_user.is_admin? %>
+          <%= member.email %>
+          <%if user_signed_in? and @group_admin && member.email != current_user.email or current_user.is_admin? %>
+          <% if member.is_active?%>
+          | <%= link_to "deactivate", group_pend_membership_path(@group, member.email) %>
+          <% else %>
+          | <%= link_to "approve", group_approve_membership_path(@group.id, member.email) %>
+          <% end %>
+          <% if member.is_admin? %>
+          | <%= link_to "demote", group_demote_membership_path(@group, member.email) %>
+          <% else %>
+          | <%= link_to "promote", group_promote_membership_path(@group, member.email) %>
+          <% end %>
+          | <%= link_to "remove", group_remove_membership_path(@group, member.email),
+                        method: :delete,
+                        data: { confirm:
+                                "Are you sure you want to remove member from this group?"
+                              }
+            %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

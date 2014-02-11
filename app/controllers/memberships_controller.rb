@@ -124,5 +124,4 @@ class MembershipsController < ApplicationController
       end
       return false
     end
-
 end

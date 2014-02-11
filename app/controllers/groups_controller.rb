@@ -101,7 +101,6 @@ class GroupsController < ApplicationController
       end
       return false
     end
-
     def authorize_update!
       if !current_user.is_admin? && !is_group_admin?(current_user) && cannot?("edit groups".to_sym, @group)
         if !is_group_admin?(current_user)
