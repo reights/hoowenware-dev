@@ -7,12 +7,16 @@
     </p>
   </div>
   <div>
-    <p>Lives in:<%= @user.zip_code %></p>
-    <p><%= link_to "Edit Your Profile", edit_user_path(@user) %></p>
+    <p>Lives in: <%= @user.zip_code %></p>
+    <% if user_signed_in? %>
+      <% if @user == current_user or current_user.is_admin? %>
+        <p><%= link_to "Edit Profile", edit_user_path(@user) %></p>
+      <% end %>
+    <% end %>
   </div>
   <hr />
   <% if @trips.length > 0 %>
-    <h4> Your Trips</h4>
+    <h4> <%= "#{@user.first_name}'s" %> Trips</h4>
     <div id="active_trips">
       <strong>Active</strong>
       <%= render "trips/active" %>

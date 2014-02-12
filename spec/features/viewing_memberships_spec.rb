@@ -28,7 +28,7 @@ feature 'Viewing Group Membership feature' do
 
      within page.all('.member')[2] do
       #  original member created with group
-      expect(page).to have_content(user1.email)
+      expect(page).to have_content(user1.full_name)
       expect(page).to_not have_content('approve')
       expect(page).to_not have_content('deactivate')
       expect(page).to_not have_content('promote')
@@ -49,7 +49,7 @@ feature 'Viewing Group Membership feature' do
     expect(page).to have_content('Membership has been activated.')
 
     within page.all('.member')[0] do
-      expect(page).to have_content(user2.email)
+      expect(page).to have_content(user2.full_name)
       expect(page).to_not have_content('approve')
     end
 
@@ -69,8 +69,8 @@ feature 'Viewing Group Membership feature' do
     sign_in_as!(user2)
     visit group_url(group)
     
-    expect(page).to have_content(user1.email)
-    expect(page).to have_content(user4.email)
-    expect(page).to_not have_content(user5.email)
+    expect(page).to have_content(user1.full_name)
+    expect(page).to have_content(user4.full_name)
+    expect(page).to_not have_content(user5.full_name)
   end
 end

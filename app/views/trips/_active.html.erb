@@ -1,16 +1,43 @@
   <% @trips.each do |trip| %>
     <% if trip.is_active? %>
-      <div>
+    <div class="trip">
+      <div class="dates">
         <%= trip.start_date.to_date.strftime("%m/%d/%y")  %> 
         - 
         <%= trip.end_date.to_date.strftime("%m/%d/%y")   %>
       </div>
-      <div>
+      <div class="title">
         <%= link_to trip.title, trip %>
       </div>
-      <div>
-      <%= trip.location %>
+      <div class="location">
+        <%= trip.location %>
       </div>
-      <br />
+    </div>
+    <% if @home_page == false %>
+      <% if user_signed_in? %>
+        <% if trip.user_id == current_user.id or current_user.is_admin? %>
+        <div>
+          <%= link_to "Settings", edit_trip_path(trip) %>
+          |
+          <% if trip.is_active? %>
+            <%= link_to "Cancel This trip", cancel_trip_path(trip.id) %>
+          <% else %>
+            <%= link_to "Reactivate This trip", reactivate_trip_path(trip.id) %>
+          <% end %>
+          |
+          <% if current_user.is_admin? %>
+            <%= link_to "Delete This trip",
+                  trip_path(trip),
+                  method: :delete,
+                  data: { confirm:
+                          "Are you sure you want to cancel this trip?"
+                        }
+            %>
+          <% end %>
+        </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <br />
     <% end %>
   <% end %>
