@@ -13,14 +13,6 @@ User.destroy_all
 Trip.destroy_all
 Group.destroy_all
 
-# Dev admin
-User.create(:first_name => 'Hoowenware', 
-            :last_name => 'Admin', 
-            :email => 'admin@hoowenware.com',
-            :password => 'passw0rd',
-            :password_confirmation => 'passw0rd',
-            :is_admin => true)
-
 # Users and Trips
 30.times do
   user = User.new
