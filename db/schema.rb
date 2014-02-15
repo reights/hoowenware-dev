@@ -38,15 +38,16 @@ ActiveRecord::Schema.define(version: 20140215004215) do
   create_table "memberships", force: true do |t|
     t.integer  "group_id"
     t.string   "email"
-    t.string   "role"
     t.integer  "last_updated_by"
     t.boolean  "is_active",       default: false
     t.boolean  "is_admin",        default: true
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "permissions", force: true do |t|
     t.integer  "user_id"

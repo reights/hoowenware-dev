@@ -37,14 +37,15 @@ end
 
 
 FactoryGirl.define do
-  sequence(:email) {|n| "user#{n}@example.com"}
-  sequence(:first_name) {|n| "Dev #{n}"}
-  sequence(:group_name) {|n| "An Example Group ##{n}"}
-  sequence(:group_id) {|n| "#{n}"}
-  sequence(:trip_title) {|n| "An Example Trip ##{n}"}
+  sequence(:email)            {|n| "user#{n}@example.com"}
+  sequence(:first_name)       {|n| "Dev #{n}"}
+  sequence(:group_name)       {|n| "An Example Group ##{n}"}
+  sequence(:group_id)         {|n| "#{n}"}
+  sequence(:trip_title)       {|n| "An Example Trip ##{n}"}
   sequence(:membership_email) {|n| "user#{n}@example.com"}
-  sequence(:poll_title) {|n| "An Example Poll ##{n}"}
-  sequence(:start_date) {|n| start = gen_random_date }
-  sequence(:end_date) {|n| gen_random_date(start) }
-  sequence(:location) {|n| "Location ##{n}"}
+  sequence(:poll_title)       {|n| "An Example Poll ##{n}"}
+  sequence(:start_date)       {|n| start = gen_random_date }
+  sequence(:end_date)         {|n| gen_random_date(start) }
+  sequence(:location)         {|n| "Location ##{n}"}
+  sequence(:select_option)    {|n| "Option ##{n}"}
 end

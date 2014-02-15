@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
 	factory :user do
-    first_name { generate(:first_name) }
+		first_name { generate(:first_name) }
     last_name 'Account'
 		email { generate(:email) }
 		password 'passw0rd'

@@ -3,6 +3,7 @@
 FactoryGirl.define do
   start = ''
   factory :poll do
+    title { generate(:poll_title) }
     poll_title { generate(:poll_title) }
     sequence(:start_date) {|n| start = gen_random_date }
     sequence(:end_date) {|n| gen_random_date(start) }

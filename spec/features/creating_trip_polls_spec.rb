@@ -28,9 +28,10 @@ feature 'Creating a Date Poll for a Trip' do
     fill_in 'Notes:', with: 'Mid May?'
     fill_in 'Expires:', with: '04/01/14'
 
-    click_link_or_button 'Create'
+    click_link_or_button 'Save'
 
     expect(page).to have_content('May Travel Poll')
+
     expect(page).to have_content('04/01/14')
   end
 

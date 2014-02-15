@@ -3,8 +3,9 @@ class Membership < ActiveRecord::Base
    validates_uniqueness_of :email,  :scope => :group_id
 
   belongs_to :group
-  has_many :users
+  belongs_to :user
   has_many :permissions, as: :thing
+  
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
   end

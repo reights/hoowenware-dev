@@ -27,6 +27,11 @@
     </div>
 
     <div>
+      <%= f.label :groups, 'Groups:' %>
+      <%= select_tag ':groups', options_from_collection_for_select(@active_groups, :id, :name, @membership_ids), { :multiple => true, :size => 5 } %>
+    </div>
+
+    <div>
       <%= f.label :gender, 'Gender:' %>
       <%= f.select :gender, [['',''], ['male', 'male'], ['female', 'female'], ['transgender', 'transgender']] %>
     </div>
@@ -37,11 +42,13 @@
                             ['divorced', 'divorced'], ['involved', 'involved']] %>
     </div>
 
-<!--     <div>
-      <label>Add Photo:</label>
-      <%= image_tag @user.avatar, :class => 'edit_profile_img' %>
-      <input type="file" name="photo" id="file" class="upload_img_browse_btn">
-    </div> -->
+    <div>
+      <div class="profile-image">
+        <%= image_tag @user.avatar, :class => 'edit_profile_img' %>
+      </div>
+      <%= f.label :avatar, 'Add Photo:' %>
+      <%= f.text_field :avatar %>
+    </div>
 
     <div>
       <%= f.label :zip_code, 'Zip Code:' %>
@@ -78,7 +85,7 @@
 
         <%= f.submit 'Update'%>
         <%= button_tag "Reset", type: :reset%>
-        <!-- <%= button_tag "Skip", type: :reset %> -->
+        <!-- <%= button_tag "Skip", type: :reset %>
         <%= f.submit "Cancel"%>
     </div>
 

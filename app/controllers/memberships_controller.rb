@@ -105,7 +105,7 @@ class MembershipsController < ApplicationController
 
   private
     def membership_params
-      params.require(:membership).permit(:email, :role)
+      params.require(:membership).permit(:email)
     end
 
     def set_group

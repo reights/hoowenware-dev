@@ -1,5 +1,6 @@
 class PollsController < ApplicationController
   before_action :set_trip
+  before_filter :check_for_cancel, :only => [:create, :update]
 
   def dates
     @poll = @trip.polls.build
@@ -29,5 +30,12 @@ class PollsController < ApplicationController
 
     def set_trip
       @trip = Trip.find(params[:trip_id])
+    end
+
+    def check_for_cancel
+      if params[:commit] == "Cancel"
+        flash[:notice] = "Your changes have been cancelled."
+        redirect_to edit_trip_path(@trip)
+      end
     end
 end

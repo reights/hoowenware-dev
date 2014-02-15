@@ -98,5 +98,4 @@ class TripsController < ApplicationController
         redirect_to @trip
       end
     end
-
 end

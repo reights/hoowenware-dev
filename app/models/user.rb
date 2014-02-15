@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
                                                 :google_oauth2, :yahoo, :windowslive,
                                                 :github, :meetup, :dropbox]
 
+  has_many :memberships, :dependent => :destroy
+  has_many :groups, :through => :memberships
   has_many :permissions
   has_many :poll_responses
   has_many :entities
@@ -16,6 +18,7 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
 
   def self.find_for_facebook_oauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
