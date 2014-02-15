@@ -1,6 +1,42 @@
   <% page_title(@group.name, "Groups") %>
   <div id="group">
   <h4><%= @group.name %></h4>
+  <% if @group.description %>
+  <div>
+    Desciption:<%= @group.description %>
+  </div>
+  <% end %>
+  <% if @group.group_type %>
+  <div>
+    Group Type: <%= @group.group_type %>
+  </div>
+  <% end %>
+  <% if @group.location %>
+  <div>
+    location: <%= @group.location %>
+  </div>
+  <% end %>
+  <% if @group.avatar %>
+  <div>
+    <%= image_tag @group.avatar %>
+  </div>
+  <% end %>
+  <% if @group.facebook_url %>
+  <div>
+    Facebook: <%= link_to @group.facebook_url %>
+  </div>
+  <% end %>
+  <% if @group.meetup_url %>
+   <div>
+    Meetup: <%= link_to @group.meetup_url %>
+  </div>
+  <% end %>
+  <% if @group.groupme_id %>
+  <div>
+    GroupMeL <%= @group.groupme_id %>
+  </div>
+  <% end %>
+  <hr />
 
   <strong>Members:</strong>
   <%if user_signed_in? %>
