@@ -1,7 +1,11 @@
 class PollsController < ApplicationController
   before_action :set_trip
 
-  def new
+  def dates
+    @poll = @trip.polls.build
+  end
+
+  def locations
     @poll = @trip.polls.build
   end
 
@@ -20,7 +24,7 @@ class PollsController < ApplicationController
   private
     def poll_params
       params.require(:poll).permit(:poll_type, :title, :start_date, :end_date, 
-                                    :location, :notes)
+                                    :location, :notes, :expires)
     end
 
     def set_trip

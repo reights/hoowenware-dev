@@ -1,0 +1,9 @@
+    <div>
+      <%= f.label :start_date, 'Start:' %>
+      <%= f.text_field :start_date %>
+    </div>
+    <div>
+      <%= f.label :end_date, 'End:' %>
+      <%= f.text_field :end_date %>
+    </div>
+     <%= f.hidden_field :poll_type, :value => "date" %>

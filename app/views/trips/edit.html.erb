@@ -3,8 +3,13 @@
 
 <% if @trip.polls %>
   <hr />
-  <h3>Poll Optip</h3>
+  <h3>Poll Options</h3>
   <% @trip.polls.each do |poll| %>
-    <%= poll.poll_type %>: <%= poll.title %>
+    <div class="poll">
+      <%= poll.poll_type %>: <%= poll.title %>
+      <% if poll.expires? %>
+       valid thru: <%= poll.expires.to_date.strftime("%m/%d/%y") %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>

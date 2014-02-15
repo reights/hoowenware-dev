@@ -7,7 +7,12 @@ HoowenwareDev::Application.routes.draw do
       get 'cancel'
       get 'reactivate'
     end
-    resources :polls
+    resources :polls do
+      member do
+        get 'dates'
+        get 'locations'
+      end
+    end
   end
 
   resources :groups do

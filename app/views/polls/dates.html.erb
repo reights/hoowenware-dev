@@ -1,0 +1,4 @@
+<h3>Add a dates poll to your trip</h3>
+<%= form_for [@trip, @poll] do |f| %>
+  <%= render partial: "date", layout: "form", :locals=>{:f=>f}  %>
+<% end %>

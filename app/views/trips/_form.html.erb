@@ -30,7 +30,7 @@
       </div>
       <span class="new-date-poll">
         <% if ! @trip.new_record? %>
-        <%= link_to "polls", new_trip_poll_path(:trip_id => @trip.id) %>
+        <%= link_to "polls", dates_trip_poll_path(:trip_id => @trip.id) %>
         <% end %>
       </span>
     </div>
@@ -41,7 +41,7 @@
       </div>
       <span class="new-location-poll">
         <% if ! @trip.new_record? %>
-        <%= link_to  "polls", new_trip_poll_path(:trip_id => @trip.id) %>
+        <%= link_to  "polls", locations_trip_poll_path(:trip_id => @trip.id) %>
         <% end %>
       </span>
     </div>

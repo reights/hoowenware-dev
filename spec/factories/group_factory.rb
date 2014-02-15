@@ -1,8 +1,7 @@
 # group factory for integration testing
 
 FactoryGirl.define do
-  sequence(:name) {|n| "An Example Group ##{n}"}
   factory :group do
-    name { generate(:name) }
+    name { generate(:group_name) }
   end
 end
