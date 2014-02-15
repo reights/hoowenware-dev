@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :get_groups, :only => [:show]
   before_action :get_active_groups, :get_membership_ids, :only => [:edit, :update]
   before_filter :check_for_cancel, :only => [:update]
 
@@ -52,6 +53,10 @@ class UsersController < ApplicationController
 
     def get_membership_ids
       @membership_ids = Membership.where(:email => @user.email).map {|x| x.group_id }
+    end
+
+    def get_groups
+      @groups = Membership.where(:email => @user.email).map {|x| x.group }
     end
 
     def check_for_cancel

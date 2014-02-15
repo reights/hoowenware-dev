@@ -15,6 +15,14 @@
     <% end %>
   </div>
   <hr />
+  <% if @groups.length > 0 %>
+  <h4> <%= "#{@user.first_name}'s" %> Groups</h4>
+  <% @groups.each do |group| %>
+    <div>
+      <%= link_to group.name,  group_path(group) %>
+    </div>
+  <% end %>
+  <% end %>
   <% if @trips.length > 0 %>
     <h4> <%= "#{@user.first_name}'s" %> Trips</h4>
     <div id="active_trips">
