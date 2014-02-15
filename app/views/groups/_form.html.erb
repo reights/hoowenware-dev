@@ -16,6 +16,34 @@
       <%= f.text_field :name %>
     </div>
     <div>
+      <%= f.label :description, 'Group Description:' %>
+      <%= f.text_area :description %>
+    </div>
+    <div>
+      <%= f.label :location, 'Group Location:' %>
+      <%= f.text_field :location %>
+    </div>
+    <div>
+      <%= f.label :group_type, 'Group Type:' %>
+      <%= f.text_field :group_type %>
+    </div>
+    <div>
+      <%= f.label :avatar, 'Group Avatar:' %>
+      <%= f.text_field :avatar %>
+    </div>
+    <div>
+      <%= f.label :facebook_url, 'Facebook Link:' %>
+      <%= f.text_field :facebook_url %>
+    </div>
+    <div>
+      <%= f.label :meetup_url, 'Meetup Link:' %>
+      <%= f.text_field :meetup_url %>
+    </div>
+    <div>
+      <%= f.label :groupme_id, 'GroupMe ID:' %>
+      <%= f.text_field :groupme_id %>
+    </div>
+    <div>
       <div>
         <% if @group.new_record? %>
           <%= f.submit 'Create'%>

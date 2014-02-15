@@ -16,6 +16,7 @@ HoowenwareDev::Application.routes.draw do
   end
 
   resources :groups do
+    resources :entity_metas
     member do
       get 'deactivate'
       get 'reactivate'

@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
   has_many :groups, :through => :memberships
   has_many :permissions
   has_many :poll_responses
-  has_many :entities
   
   def to_s
     "#{first_name} #{last_name}"

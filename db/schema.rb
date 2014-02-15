@@ -11,26 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140215004215) do
+ActiveRecord::Schema.define(version: 20140214195913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "entity_meta", force: true do |t|
-    t.integer  "entity_id",                null: false
-    t.string   "entity_type", default: "", null: false
-    t.string   "meta_type",   default: "", null: false
-    t.string   "data",        default: "", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "groups", force: true do |t|
-    t.string   "name",        default: "",   null: false
+    t.string   "name",         default: "",   null: false
     t.text     "description"
+    t.text     "group_type"
+    t.text     "location"
+    t.text     "avatar"
+    t.text     "facebook_url"
+    t.text     "meetup_url"
     t.text     "groupme_id"
-    t.boolean  "is_active",   default: true
+    t.boolean  "is_active",    default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

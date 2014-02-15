@@ -77,7 +77,8 @@ class GroupsController < ApplicationController
 
   private
     def group_params
-      params.require(:group).permit(:name)
+      params.require(:group).permit(:name, :description, :group_type, :location,
+                                    :avatar, :facebook_url, :meetup_url, :groupme_id)
     end
 
     def set_group
