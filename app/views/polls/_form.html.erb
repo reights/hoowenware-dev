@@ -1,0 +1,41 @@
+  <%= form_for [@trip, @poll] do |f| %>
+    <% if @poll.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@poll.errors.count, "error") %> prohibited this poll from being saved:
+        </h4>
+        <ul>
+          <% @poll.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :title, 'Title:' %>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.label :start_date, 'Start:' %>
+      <%= f.text_field :start_date %>
+    </div>
+    <div>
+      <%= f.label :end_date, 'End:' %>
+      <%= f.text_field :end_date %>
+    </div>
+     <div>
+      <%= f.label :notes, 'Notes:' %>
+      <%= f.text_field :notes %>
+    </div>
+    <div>
+        <%= f.hidden_field :poll_type, :value => "date" %>
+
+        <% if @poll.new_record? %>
+          <%= f.submit 'Create'%>
+        <% else %>
+          <%= f.submit 'Update'%>
+        <% end %>
+        <%= button_tag "Reset", type: :reset%>
+        <%= f.submit "Cancel"%>
+    </div>
+  <% end %>

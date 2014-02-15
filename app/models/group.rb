@@ -1,8 +1,9 @@
 class Group < ActiveRecord::Base
-  validates :name, presence: true
+  validates :name, :presence => true
 
   has_many :memberships
   has_many :permissions, as: :thing
+  has_many :entities
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
   end

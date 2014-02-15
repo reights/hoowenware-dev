@@ -12,6 +12,9 @@ feature 'Viewing Trips feature' do
   before do
   end
 
+  after do
+  end
+
   scenario 'can view an trips details' do
     visit '/'
     click_link trip1.title
@@ -53,12 +56,15 @@ feature 'Viewing Trips feature' do
 
     expect(page).to_not have_content(trip2.title)
 
-    sign_in_as!(user2)
+    login_as(user2, :scope => :user)
     visit user_url(user2)
     
     expect(page).to have_content(trip2.title)
     expect(page).to have_content(trip2.start_date.strftime("%m/%d/%y"))
     expect(page).to have_content(trip2.end_date.strftime("%m/%d/%y"))
     expect(page).to have_content(trip2.location)
+
+    logout(:user2)
+    Warden.test_reset!
   end
 end

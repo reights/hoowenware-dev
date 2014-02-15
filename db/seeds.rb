@@ -21,6 +21,26 @@ User.create(:first_name => 'Hoowenware',
             :password_confirmation => 'passw0rd',
             :is_admin => true)
 
+# lampkin
+lampkin = User.new(:first_name => 'Stephanie',
+            :last_name => 'Lampkin',
+            :email => 'info@hoowenware.com',
+            :password => 'passw0rd1',
+            :password_confirmation => 'passw0rd1',
+            :avatar => 'https://lh4.googleusercontent.com/-zZjEQIBvdzs/AAAAAAAAAAI/AAAAAAAAAJg/5sPaE3fY6zg/photo.jpg',
+            :zip_code => '11692',
+            :is_admin => true)
+
+lampkin.save!
+
+Trip.create(:title => 'Hoowenware Launch Party',
+            :location => 'Oranjestad, Aruba',
+            :start_date => '05/15/14',
+            :end_date => '05/16/14',
+            :hash_tag => '#hooWenWare',
+            :user_id => lampkin.id)
+
+
 # Users and Trips
 30.times do
   user = User.new

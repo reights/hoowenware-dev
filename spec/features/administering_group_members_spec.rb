@@ -31,11 +31,6 @@ feature 'Administering Group Members feature' do
     expect(page).to have_content('Membership has been suspended.')
     expect(page).to_not have_content('deactivate')
 
-    click_link_or_button('promote')
-
-    expect(page).to have_content('Membership has been upgraded to group administrator.')
-    expect(page).to_not have_content('promote')
-
     click_link_or_button('demote')
 
     expect(page).to have_content('Membership has been set to normal user.')

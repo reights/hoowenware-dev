@@ -19,17 +19,31 @@
       <%= f.label :hash_tag, 'Hashtag:' %>
       <%= f.text_field :hash_tag%>
     </div>
-    <div>
-      <%= f.label :start_date, 'Start:' %>
-      <%= f.text_field :start_date %>
+    <div class="new-trip-dates">
+      <div>
+        <%= f.label :start_date, 'Start:' %>
+        <%= f.text_field :start_date %>
+      </div>
+      <div>
+        <%= f.label :end_date, 'End:' %>
+        <%= f.text_field :end_date %>
+      </div>
+      <span class="new-date-poll">
+        <% if ! @trip.new_record? %>
+        <%= link_to "polls", new_trip_poll_path(:trip_id => @trip.id) %>
+        <% end %>
+      </span>
     </div>
-    <div>
-      <%= f.label :end_date, 'End:' %>
-      <%= f.text_field :end_date %>
-    </div>
-    <div>
-      <%= f.label :location, 'Location:' %>
-      <%= f.text_field :location %>
+    <div class="new-trip-location">
+      <div>
+        <%= f.label :location, 'Location:' %>
+        <%= f.text_field :location %>
+      </div>
+      <span class="new-location-poll">
+        <% if ! @trip.new_record? %>
+        <%= link_to  "polls", new_trip_poll_path(:trip_id => @trip.id) %>
+        <% end %>
+      </span>
     </div>
     <div>
       <%= f.label :is_private, 'Privacy:' %>

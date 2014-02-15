@@ -11,15 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211061503) do
+ActiveRecord::Schema.define(version: 20140215004215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
+  create_table "entity_meta", force: true do |t|
+    t.integer  "entity_id",                null: false
+    t.string   "entity_type", default: "", null: false
+    t.string   "meta_type",   default: "", null: false
+    t.string   "data",        default: "", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "groups", force: true do |t|
-    t.string   "name",       default: "",   null: false
-    t.boolean  "is_active",  default: true
+    t.string   "name",        default: "",   null: false
+    t.text     "description"
+    t.text     "groupme_id"
+    t.boolean  "is_active",   default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -30,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140211061503) do
     t.string   "role"
     t.integer  "last_updated_by"
     t.boolean  "is_active",       default: false
-    t.boolean  "is_admin",        default: false
+    t.boolean  "is_admin",        default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,12 +57,39 @@ ActiveRecord::Schema.define(version: 20140211061503) do
     t.datetime "updated_at"
   end
 
-  create_table "trips", force: true do |t|
-    t.string   "title"
-    t.string   "hash_tag"
+  create_table "poll_responses", force: true do |t|
+    t.hstore   "choices"
+    t.integer  "user_id"
+    t.integer  "trip_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "poll_responses", ["trip_id"], name: "index_poll_responses_on_trip_id", using: :btree
+  add_index "poll_responses", ["user_id"], name: "index_poll_responses_on_user_id", using: :btree
+
+  create_table "polls", force: true do |t|
+    t.string   "title",                     null: false
+    t.string   "poll_type",                 null: false
     t.date     "start_date"
     t.date     "end_date"
     t.string   "location"
+    t.text     "notes"
+    t.date     "expires"
+    t.boolean  "is_active",  default: true
+    t.integer  "trip_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "polls", ["trip_id"], name: "index_polls_on_trip_id", using: :btree
+
+  create_table "trips", force: true do |t|
+    t.string   "title",          default: "",    null: false
+    t.string   "hash_tag"
+    t.date     "start_date",                     null: false
+    t.date     "end_date",                       null: false
+    t.string   "location",       default: "",    null: false
     t.boolean  "is_private",     default: false
     t.boolean  "hide_guestlist", default: false
     t.boolean  "is_active",      default: true

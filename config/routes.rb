@@ -7,6 +7,7 @@ HoowenwareDev::Application.routes.draw do
       get 'cancel'
       get 'reactivate'
     end
+    resources :polls
   end
 
   resources :groups do
@@ -14,7 +15,9 @@ HoowenwareDev::Application.routes.draw do
       get 'deactivate'
       get 'reactivate'
     end
+
     resources :memberships, only: [:new, :create]
+    
     get "memberships/:email/approve" => 'memberships#approve', 
         :controller => 'memberships',
         :constraints => { :email => /[^\/]+/},

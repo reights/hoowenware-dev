@@ -44,7 +44,7 @@ feature 'Viewing Group Membership feature' do
     within page.all('.member')[0] do
       expect(page).to have_content(user2.email)
       click_link_or_button('approve')
-      expect(page).to_not have_content('demote')
+      expect(page).to_not have_content('deactivate')
     end
     expect(page).to have_content('Membership has been activated.')
 
@@ -60,6 +60,12 @@ feature 'Viewing Group Membership feature' do
     expect(page).to have_content(user3.email)
     within page.all('.member')[0] do
       expect(page).to have_content(user3.email)
+      click_link_or_button('demote')
+    end
+
+    expect(page).to have_content('Membership has been set to normal user.')
+    
+    within page.all('.member')[0] do
       expect(page).to_not have_content('deactivate')
       expect(page).to_not have_content('demote')
     end

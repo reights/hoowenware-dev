@@ -1,8 +1,8 @@
 class Membership < ActiveRecord::Base
-  validates :email, presence: true
-   validates_uniqueness_of :email, :scope => :group_id
+  validates :email,                 :presence => true
+   validates_uniqueness_of :email,  :scope => :group_id
 
-  belongs_to :groups
+  belongs_to :group
   has_many :users
   has_many :permissions, as: :thing
   scope :viewable_by, ->(user) do
