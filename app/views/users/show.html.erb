@@ -21,8 +21,11 @@
       <strong>Active</strong>
       <%= render "trips/active" %>
     </div>
+    <% cancelled_trips = @trips.where(is_active: false) %>
+    <% if ! cancelled_trips.empty? %>
     <div id="cancelled_trips">
       <strong>Cancelled</strong>
       <%= render "trips/inactive" %>
     </div>
+    <% end %>
   <% end %>
