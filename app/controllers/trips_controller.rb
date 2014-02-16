@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   before_action :authorize_admin!, only: [:destroy]
   before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_trip, only: [:show, :edit, :update, :cancel,
-                                  :reactivate, :destroy]
+                                  :reactivate, :preview_invitation, :destroy]
   before_filter :check_for_cancel, :only => [:create, :update]
 
   def index
@@ -33,6 +33,7 @@ class TripsController < ApplicationController
 
   def edit
     #set_trip
+    @invitations = @trip.invitations
   end
 
   def update
@@ -68,6 +69,11 @@ class TripsController < ApplicationController
       flash[:alert] = "You must be an administrator of this trip to do that."
       redirect_to trips_path
     end
+  end
+
+  def preview_invitation
+    @dates_options = @trip.polls.where(poll_type: 'date')
+    @location_options = @trip.polls.where(poll_type: 'location')
   end
 
   def destroy

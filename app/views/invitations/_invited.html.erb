@@ -1,0 +1,26 @@
+  <%= form_for [@trip, @invitation] do |f| %>
+    <% if @invitation.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@invitation.errors.count, "error") %> prohibited this invitation from being saved:
+        </h4>
+        <ul>
+          <% @invitation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="invited">
+      <p>Invited (<%= @invitations.count %>)</p>
+      <% @invitations.each do |invitee| %>
+        <% if invitee.email? %>
+        <div class='invitee'>
+          <%= check_box_tag "email[]", invitee.email, false %>
+          <%= f.label :email, invitee.email %>
+        </div>
+        <% end %>
+      <% end %>
+      <%= f.submit 'Delete selected' %>
+    </div>
+  <% end %>

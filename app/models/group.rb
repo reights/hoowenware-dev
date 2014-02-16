@@ -3,6 +3,7 @@ class Group < ActiveRecord::Base
 
   has_many :memberships
   has_many :users, :through => :memberships
+  has_many :trips
   has_many :permissions, as: :thing
 
   scope :viewable_by, ->(user) do

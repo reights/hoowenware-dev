@@ -7,6 +7,7 @@ class Trip < ActiveRecord::Base
   belongs_to :user
   has_many :permissions, as: :thing
   has_many :polls
+  has_many :invitations
   
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })

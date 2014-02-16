@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
 
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
+  has_many :trips
   has_many :permissions
   has_many :poll_responses
+  has_many :invitations
   
   def to_s
     "#{first_name} #{last_name}"

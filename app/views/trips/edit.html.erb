@@ -1,6 +1,23 @@
 <h4><%= @trip.title %> Settings</h4>
 <%= render "form" %>
 
+
+<hr />
+<div class="invited">
+  <p>Invited (<%= @invitations.count %>)</p>
+  <% @invitations.each do |invitee| %>
+    <div class='invitee'>
+      <%= invitee.email %>
+    </div>
+  <% end %>
+</div>
+<br />
+<div class="trip-invitations">
+  Invite via: 
+  <%= link_to 'Facebook Friends', new_trip_invitation_path(@trip) %> |
+  <%= link_to 'Google Contacts', new_trip_invitation_path(@trip) %> |
+  <%= link_to 'Email', new_trip_invitation_path(@trip) %>
+</div>
 <% if @trip.polls %>
   <hr />
   <h3>Poll Options</h3>

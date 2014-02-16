@@ -40,6 +40,7 @@ FactoryGirl.define do
   sequence(:email)            {|n| "user#{n}@example.com"}
   sequence(:first_name)       {|n| "Dev #{n}"}
   sequence(:group_name)       {|n| "An Example Group ##{n}"}
+  sequence(:trip_id)          {|n| "#{n}"}
   sequence(:group_id)         {|n| "#{n}"}
   sequence(:trip_title)       {|n| "An Example Trip ##{n}"}
   sequence(:membership_email) {|n| "user#{n}@example.com"}

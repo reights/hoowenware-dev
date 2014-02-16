@@ -1,0 +1,23 @@
+  <%= form_for [@trip, @invitation] do |f| %>
+    <% if @invitation.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@invitation.errors.count, "error") %> prohibited this invitation from being saved:
+        </h4>
+        <ul>
+          <% @invitation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="email-addresses">
+      <%= f.label :email, 'Email Addresses' %><br />
+      <%= f.text_area :email, {:size => "20x10", :placeholder => 'Type emails seperated by a comma'} %>
+    </div>
+    <div>
+      <%= link_to 'Preview', preview_invitation_trip_path(@trip), :method => :get  %>
+      <%= f.submit 'Add'%>
+      <%= f.submit "Cancel"%>
+    </div>
+  <% end %>

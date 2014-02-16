@@ -4,7 +4,7 @@ require 'spec_helper'
 
 feature 'Creating A Group feature' do
   before do
-    sign_in_as!(FactoryGirl.create(:user))
+    login_as(FactoryGirl.create(:user), :scope => :user)
   end
 
   scenario 'creating a group' do

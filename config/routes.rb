@@ -6,7 +6,11 @@ HoowenwareDev::Application.routes.draw do
     member do
       get 'cancel'
       get 'reactivate'
+      get 'preview_invitation'
     end
+    
+    resources :invitations, only: [:new, :create]
+
     resources :polls do
       member do
         get 'dates'
@@ -16,7 +20,6 @@ HoowenwareDev::Application.routes.draw do
   end
 
   resources :groups do
-    resources :entity_metas
     member do
       get 'deactivate'
       get 'reactivate'
