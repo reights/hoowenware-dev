@@ -1,4 +1,12 @@
 <h4>Add Invitations</h4>
+<div class="trip-invitations">
+  Via: 
+  <%= link_to "Facebook Friends", user_omniauth_authorize_path(:facebook) %>
+  <%= link_to "Google Contacts", user_omniauth_authorize_path(:google_oauth2) %>
+  <%= link_to 'Email', new_trip_invitation_path(@trip) %>
+</div>
+<hr />
 <%= render "invited" %>
 <hr />
+
 <%= render "form" %>

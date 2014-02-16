@@ -15,10 +15,12 @@ feature 'Creating Trips' do
     end
 
     click_button "Sign in"
+    visit '/trips/new'
   end
 
 
   scenario "can create an trip" do
+
 
     within '#new_trip_form' do
       fill_in 'Trip Title:', with: 'Example Trip'

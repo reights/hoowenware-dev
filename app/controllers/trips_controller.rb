@@ -29,6 +29,7 @@ class TripsController < ApplicationController
 
   def show
     #set_trip
+    @invitations = @trip.invitations
   end
 
   def edit

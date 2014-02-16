@@ -44,6 +44,8 @@ gem 'omniauth-github', '~> 1.1.1'
 gem 'omniauth-meetup', '~> 0.0.7'
 gem 'omniauth-dropbox', '~> 0.2.0'
 
+gem 'opengraph'
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
@@ -58,6 +60,7 @@ end
 
 group :test do
   gem 'capybara', "2.1.0"
+  gem 'nokogiri', '1.4.0'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'selenium-webdriver', '~> 2.39.0'
   gem 'database_cleaner', '~> 1.0.1'
