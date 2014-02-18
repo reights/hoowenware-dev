@@ -14,8 +14,8 @@
 <br />
 <div class="trip-invitations">
   Invite via: 
-  <%= link_to 'Facebook Friends', new_trip_invitation_path(@trip) %> |
-  <%= link_to 'Google Contacts', new_trip_invitation_path(@trip) %> |
+  <%= link_to "Facebook Friends", trip_facebook_invitation_path(@trip) %> |
+  <%= link_to "Google Contacts", trip_google_invitation_path(@trip) %> |
   <%= link_to 'Email', new_trip_invitation_path(@trip) %>
 </div>
 <% if @trip.polls %>

@@ -1,11 +1,11 @@
-<h4>Add Invitations</h4>
+<h4>Add Google Contacts</h4>
 <div class="trip-invitations">
   Via: 
   <%= link_to "Facebook Friends", trip_facebook_invitation_path(@trip) %>
-  <%= link_to "Google Contacts", trip_google_invitation_path(@trip) %>
+  <%= link_to "Email", new_trip_invitation_path(@trip) %>
 </div>
 <hr />
 <%= render "invited" %>
 <hr />
 
-<%= render "form" %>
+<%= render "gmail" %>

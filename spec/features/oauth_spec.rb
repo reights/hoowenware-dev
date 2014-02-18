@@ -15,9 +15,13 @@ feature 'Social OAuth Authentication feature' do
       uid: 'fb_123545',
       info: {
         email: 'testaccount@example.com',
-        first_name: 'Test',
-        first_name: 'Account',
+        first_name: 'Facebook',
+        first_name: 'User',
         image: 'http://www.example.com/img/test12345.jpg?type=square'
+      },
+      credentials: {
+        token: '12456789abcdefghijklmnopqrstuvwzyz!@#$%^&*()-_',
+        expires_at: 1397845024
       }
     })
     
@@ -29,143 +33,29 @@ feature 'Social OAuth Authentication feature' do
     expect(page).to have_content "#{first_name}"
   end
 
-  scenario "Sign in with Twitter" do
-    OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
-      provider: 'twitter',
-      uid: 't_123545',
-      info: {
-        nickname: 'testaccount',
-        name: 'Test Account',
-        image: 'http://www.example.com/img/test12345_normal.jpg'
-      }
-    })
-
-    first_name = OmniAuth.config.mock_auth[:twitter][:info][:name].split(' ')[0]
-
-    visit '/users/auth/twitter'
-
-    expect(page).to have_content 'Successfully authenticated from Twitter account.'
-    expect(page).to have_content "#{first_name}"
-  end
-
-  scenario "Sign in with LinkedIn" do
-    OmniAuth.config.mock_auth[:linkedin] = OmniAuth::AuthHash.new({
-      provider: 'linkedin',
-      uid: 'l_123545',
-      info: {
-        email: 'testaccount@example.com',
-        first_name: 'Test',
-        first_name: 'Account',
-        image: 'http://www.example.com/img/test12345.jpg'
-      }
-    })
-
-    first_name = OmniAuth.config.mock_auth[:linkedin][:info][:first_name]
-
-    visit '/users/auth/linkedin'
-
-    expect(page).to have_content 'Successfully authenticated from Linkedin account.'
-    expect(page).to have_content "#{first_name}"
-  end
-
   scenario "Sign in with Google" do
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-      provider: 'google_oauth2',
+    OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
+      provider: 'google',
       uid: 'g_123545',
       info: {
         email: 'testaccount@example.com',
-        name: 'Test Account',
+        first_name: 'Google',
+        first_name: 'User',
         image: 'http://www.example.com/img/test12345.jpg'
+      },
+      credentials: {
+        token: '12456789abcdefghijklmnopqrstuvwzyz!@#$%^&*()-_',
+        expires_at: 1397845024
       }
     })
 
-    first_name = OmniAuth.config.mock_auth[:google_oauth2][:info][:name].split(' ')[0]
+    first_name = OmniAuth.config.mock_auth[:google][:info][:first_name]
 
-    visit '/users/auth/google_oauth2'
+    visit '/users/auth/google'
 
     expect(page).to have_content 'Successfully authenticated from Google account.'
     expect(page).to have_content "#{first_name}"
   end
-
-  scenario "Sign in with Yahoo" do
-    OmniAuth.config.mock_auth[:yahoo] = OmniAuth::AuthHash.new({
-      provider: 'yahoo',
-      uid: 'y_123545',
-      info: {
-        email: 'testaccount@example.com',
-        image: 'http://www.example.com/img/test12345.jpg'
-      },
-      extra: {
-        raw_info: {
-          public_display_name: 'Test Account'
-        }
-      }
-    })
-  
-    data = OmniAuth.config.mock_auth[:yahoo][:extra][:raw_info]
-    first_name = data[:uid]
-
-    visit '/users/auth/yahoo'
-
-    expect(page).to have_content 'Successfully authenticated from Yahoo account.'
-    expect(page).to have_content "#{first_name}"
-  end
-
-  scenario "Sign in with WindowsLive" do
-    OmniAuth.config.mock_auth[:windowslive] = OmniAuth::AuthHash.new({
-      provider: 'windowslive',
-      uid: 'w_123545',
-      info: {
-        email: 'testaccount@example.com',
-        name: 'Test Account'
-      },
-    })
-  
-    data = OmniAuth.config.mock_auth[:windowslive]
-    first_name = data[:info][:name].split(' ')[0]
-
-    visit '/users/auth/Windowslive'
-
-    expect(page).to have_content 'Successfully authenticated from WindowsLive account.'
-    expect(page).to have_content "#{first_name}"
-  end
-
-  scenario "Sign in with Github" do
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-      provider: 'github',
-      uid: 'g_123545',
-      info: {
-        email: 'testaccount@example.com',
-        name: 'Test Account'
-      }
-    })
-
-    first_name = OmniAuth.config.mock_auth[:github][:info][:name].split(' ')[0]
-
-    visit '/users/auth/github'
-
-    expect(page).to have_content 'Successfully authenticated from Github account.'
-    expect(page).to have_content "#{first_name}"
-  end
-
-  scenario "Sign in with Meetup" do
-    OmniAuth.config.mock_auth[:meetup] = OmniAuth::AuthHash.new({
-      provider: 'meetup',
-      uid: 'm_123545',
-      info: {
-        name: 'Test Account',
-        image: 'http://www.example.com/img/test12345.jpg'
-      }
-    })
-
-    first_name = OmniAuth.config.mock_auth[:meetup][:info][:name].split(' ')[0]
-
-    visit '/users/auth/meetup'
-
-    expect(page).to have_content 'Successfully authenticated from Meetup account.'
-    expect(page).to have_content "#{first_name}"
-  end
-
 
   scenario "Sign in with Dropbox" do
     OmniAuth.config.mock_auth[:dropbox] = OmniAuth::AuthHash.new({
@@ -173,7 +63,11 @@ feature 'Social OAuth Authentication feature' do
       uid: 'm_123545',
       info: {
         email: 'testaccount@example.com',
-        name: 'Test Account'
+        name: 'Dropbox User'
+      },
+      credentials: {
+        token: '12456789abcdefghijklmnopqrstuvwzyz!@#$%^&*()-_',
+        token_secret: 'shhhhhitz@secr3t'
       }
     })
     first_name = OmniAuth.config.mock_auth[:dropbox][:info][:name].split(' ')[0]

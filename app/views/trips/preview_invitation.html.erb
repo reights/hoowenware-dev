@@ -13,7 +13,7 @@ a
 </div>
 <div>
   <%= @trip.location %>
-  <% if @location_options %>
+  <% if @location_options.count > 0 %>
     or
     <% @location_options.each do |poll| %>
       <%= poll.location %>
@@ -22,7 +22,7 @@ a
 </div>
 <div>
   <%= @trip.start_date.to_date.strftime("%m/%d/%y") %> - <%= @trip.end_date.to_date.strftime("%m/%d/%y") %>
-  <% if @dates_options %>
+  <% if @dates_options.count > 0 %>
     or 
     <% @dates_options.each do |poll| %>
       <%= poll.start_date.to_date.strftime("%m/%d/%y") %> -

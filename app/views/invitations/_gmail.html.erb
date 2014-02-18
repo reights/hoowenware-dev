@@ -11,14 +11,16 @@
         </ul>
       </div>
     <% end %>
-    <div class="email-addresses">
-      <%= f.label :email, 'Email Addresses' %><br />
-      <%= f.text_area :email, {:size => "20x10", :placeholder => 'Type emails seperated by a comma'} %>
-    </div>
+    <% if @contacts.count > 0 %>
+      <div class="gmail-contacts">
+      <%= select_tag(:email, options_for_select(@contacts), 
+                    { :multiple => true, :size => 10 }) %>
+      </div>
+    <% end %>
     <hr />
     <div>
       <%= link_to 'Preview', preview_invitation_trip_path(@trip), :method => :get  %>
-      <%= f.submit 'Add'%>
+      <%= f.submit "Add"%>
       <%= f.submit "Cancel"%>
     </div>
   <% end %>

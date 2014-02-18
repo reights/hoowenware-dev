@@ -232,13 +232,15 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :facebook, ENV["FACEBOOK_APP_ID"],ENV["FACEBOOK_APP_SECRET"]
-  config.omniauth :twitter, ENV["TWITTER_API_KEY"],ENV["TWITTER_API_SECRET"]
-  config.omniauth :linkedin, ENV["LINKEDIN_API_KEY"], ENV["LINKEDIN_SECRET_KEY"]
-  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
-  config.omniauth :yahoo, ENV["YAHOO_CONSUMER_KEY"], ENV["YAHOO_CONSUMER_SECRET"]
-  config.omniauth :windowslive, ENV["MICROSOFT_CLIENT_ID"], ENV["MICROSOFT_CLIENT_SECRET"], :scope => 'wl.basic'
-  config.omniauth :github, ENV["GITHUB_CLIENT_ID"], ENV["GITHUB_CLIENT_SECRET"]
-  config.omniauth :meetup, ENV["MEETUP_KEY"], ENV["MEETUP_SECRET"]
+  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], 
+                  ENV["GOOGLE_CLIENT_SECRET"], 
+                  {
+                    :name => "google",
+                    :scope => "userinfo.email, userinfo.profile, plus.me, https://www.google.com/m8/feeds/",
+                    :prompt => "select_account",
+                    :image_aspect_ratio => "square",
+                    :image_size => 50
+                  }
   config.omniauth :dropbox, ENV["DROPBOX_APP_KEY"], ENV["DROPBOX_APP_SECRET"]
 
   # ==> Warden configuration

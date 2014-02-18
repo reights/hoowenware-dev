@@ -11,14 +11,17 @@
         </ul>
       </div>
     <% end %>
-    <div class="email-addresses">
-      <%= f.label :email, 'Email Addresses' %><br />
-      <%= f.text_area :email, {:size => "20x10", :placeholder => 'Type emails seperated by a comma'} %>
-    </div>
+    <% if @fbfriends.count > 0 %>
+      <div class="facebook-friends">
+        <% friends_list = @fbfriends.map {|friend| [friend['name'], friend['username']+'@facebook.com']} %>
+        <%= select_tag(:email, options_for_select(friends_list), 
+                      { :multiple => true, :size => 10 }) %>
+      </div>
+    <% end %>
     <hr />
     <div>
       <%= link_to 'Preview', preview_invitation_trip_path(@trip), :method => :get  %>
-      <%= f.submit 'Add'%>
+      <%= f.submit "Add"%>
       <%= f.submit "Cancel"%>
     </div>
   <% end %>

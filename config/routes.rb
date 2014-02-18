@@ -8,8 +8,13 @@ HoowenwareDev::Application.routes.draw do
       get 'reactivate'
       get 'preview_invitation'
     end
-    
+  
     resources :invitations, only: [:new, :create]
+    get "invitations/facebook" => 'invitations#facebook',
+        :as => 'facebook_invitation'
+    get "invitations/google" => 'invitations#google',
+        :as => 'google_invitation'
+
 
     resources :polls do
       member do
@@ -53,5 +58,5 @@ HoowenwareDev::Application.routes.draw do
         :as => 'remove_membership'
   end
   
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:create, :show, :edit, :update]
 end
