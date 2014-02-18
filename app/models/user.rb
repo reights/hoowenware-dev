@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :poll_responses
   has_many :invitations
   has_many :authentications
+  has_many :web_links
   
   def to_s
     "#{first_name} #{last_name}"
@@ -101,6 +102,18 @@ class User < ActiveRecord::Base
     @acct = self.authentications.where(:provider => 'dropbox').first!
   end
 
+  def has_links?
+    @links = self.web_links
+    if @links.present?
+      return true
+    end
+    return false
+  end
+
+
+  def links
+    @links = self.web_links
+  end
 
   private
     # quick method to see what the oauth provider returns

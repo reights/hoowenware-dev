@@ -8,12 +8,16 @@
   </div>
   <div>
     <p>Lives in: <%= @user.zip_code %></p>
-    <% if user_signed_in? %>
-      <% if @user == current_user or current_user.is_admin? %>
-        <p><%= link_to "Edit Profile", edit_user_path(@user) %></p>
-      <% end %>
-    <% end %>
   </div>
+  
+  <% if @user.web_links.count > 0 %>
+    <hr />
+    <h4> links: </h4>
+    <% @user.web_links.each do |link| %>
+      <%= link_to link.url, link.url, :target => "_blank" %>
+    <% end %>
+  <% end %>
+
   <hr />
   <% if @groups.length > 0 %>
   <h4> <%= "#{@user.first_name}'s" %> Groups</h4>
@@ -36,4 +40,11 @@
       <%= render "trips/inactive" %>
     </div>
     <% end %>
+  <% end %>
+  <div>
+  <% if user_signed_in? %>
+    <% if @user == current_user or current_user.is_admin? %>
+      <p><%= link_to "Edit Profile", edit_user_path(@user) %></p>
+    <% end %>
+  </div>
   <% end %>

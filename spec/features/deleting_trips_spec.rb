@@ -21,7 +21,7 @@ feature 'Deleting Trips feature' do
 
 		visit '/'
 		click_link trip1.title
-		click_link 'Delete This trip'
+		click_link 'Delete this trip'
 
 		expect(page).to have_content("This trip has been deleted.")
 

@@ -1,6 +1,6 @@
 class Membership < ActiveRecord::Base
   validates :email,                 :presence => true
-   validates_uniqueness_of :email,  :scope => :group_id
+  validates_uniqueness_of :email,   :scope => :group_id
 
   belongs_to :group
   belongs_to :user

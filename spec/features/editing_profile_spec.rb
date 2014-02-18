@@ -8,7 +8,6 @@ feature 'Editing Profile' do
 
   before do
     login_as(user, :scope => :user)
-    visit "/users/#{user.id}/edit"
   end
 
   after do
@@ -17,6 +16,7 @@ feature 'Editing Profile' do
   end
 
   scenario 'editing a users profile' do
+    visit edit_user_path(user)
     fill_in 'First Name:', with: 'Christopher'
     fill_in 'Last Name:', with: 'Wallace'
     select 'male', from: 'Gender:'
@@ -28,7 +28,9 @@ feature 'Editing Profile' do
     select 'none', from: 'Dietary Preferences:'
     select 'group females', from: 'Roommate Preferences:'
 
-    click_button 'Update'
+    within '#edit_user_form' do
+      click_button 'Update'
+    end
 
     expect(page).to have_content('Your profile has been updated')
   end

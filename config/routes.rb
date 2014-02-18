@@ -58,5 +58,7 @@ HoowenwareDev::Application.routes.draw do
         :as => 'remove_membership'
   end
   
-  resources :users, only: [:create, :show, :edit, :update]
+  resources :users, only: [:create, :show, :edit, :update] do
+    resources :web_links, only: [:create, :destroy]
+  end
 end

@@ -23,10 +23,18 @@
   <h3>Poll Options</h3>
   <% @trip.polls.each do |poll| %>
     <div class="poll">
-      <%= poll.poll_type %>: <%= poll.title %>
+      <%= poll.poll_type %> poll: 
+        <%= link_to poll.title, edit_trip_poll_path(@trip, poll.id) %>
       <% if poll.expires? %>
        valid thru: <%= poll.expires.to_date.strftime("%m/%d/%y") %>
-      <% end %>
+      <% end %> | <%= link_to "Delete this poll",
+                      trip_poll_path(@trip, poll.id),
+                      method: :delete,
+                      data: { confirm:
+                              "Are you sure you want to delete this poll?"
+                            }
+                  %>
+
     </div>
   <% end %>
 <% end %>

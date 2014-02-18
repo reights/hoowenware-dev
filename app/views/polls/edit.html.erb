@@ -1,0 +1,4 @@
+<h4>Edit your <%= @poll.poll_type %> poll, '<%= @poll.title %>'<h4>
+  <%= form_for [@trip, @poll] do |f| %>
+  <%= render partial: @poll.poll_type, layout: "form", :locals=>{:f=>f}  %>
+<% end %>

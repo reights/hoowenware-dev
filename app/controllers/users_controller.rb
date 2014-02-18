@@ -11,10 +11,12 @@ class UsersController < ApplicationController
 
   def edit
     #set_user
+    @web_link = @user.web_links.build
   end
 
   def update
     #set_user
+    @web_link = @user.web_links.build(url:'')
     if @user.update(user_params)
       # This needs to be fixed to remove unselected group      
       if params[:groups]

@@ -1,0 +1,17 @@
+  <%= form_for [@user, @web_link], html: {  id: 'link-form' } do |f| %>
+    <% if @web_link.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@web_link.errors.count, "error") %> prohibited this link from being saved:
+        </h4>
+        <ul>
+          <% @web_link.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.label :url, "Link:" %>
+    <%= f.text_field  :url %>
+    <%= f.submit 'Add' %>
+  <% end %>
