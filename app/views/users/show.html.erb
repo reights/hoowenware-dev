@@ -11,13 +11,11 @@
   </div>
 
   <hr />
-  <% if @groups.length > 0 %>
-  <h4> <%= "#{@user.first_name}'s" %> Groups</h4>
-  <% @groups.each do |group| %>
-    <div>
-      <%= link_to group.name,  group_path(group) %>
-    </div>
-  <% end %>
+  <% @memberships.each do |membership| %>
+    <%=link_to membership.group, group_path(membership.group.id) %>
+    <% if ! membership.is_active? %>
+    ( pending )
+    <% end %>
   <% end %>
   <% if @trips.length > 0 %>
     <h4> <%= "#{@user.first_name}'s" %> Trips</h4>

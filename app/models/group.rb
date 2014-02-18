@@ -10,5 +10,8 @@ class Group < ActiveRecord::Base
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
   end
 
+  def to_s
+    return self.name
+  end
 
 end

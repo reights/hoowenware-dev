@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def show
     #set_user
     @web_link = @user.web_links.build(url: '')
+    @groups = @memberships.where(:email => @user.email).map {|x| x.group }
   end
 
   def edit
@@ -21,9 +22,9 @@ class UsersController < ApplicationController
       if params[:groups]
         params[:groups].each do |id| 
           @group = Group.find(id)
-
-          @membership = @group.memberships.build(email: @user.email)
-
+          @membership = @group.memberships.build(email: @user.email, 
+                                                is_admin: false,
+                                                is_active: false)
           @membership.save
         end
       end
@@ -60,7 +61,7 @@ class UsersController < ApplicationController
     end
 
     def get_groups
-      @groups = Membership.where(:email => @user.email).map {|x| x.group }
+      @memberships = Membership.where(:email => @user.email)
     end
 
     def get_trips
