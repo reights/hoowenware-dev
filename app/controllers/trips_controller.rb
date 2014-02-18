@@ -89,7 +89,7 @@ class TripsController < ApplicationController
   private
     def trip_params
       params.require(:trip).permit(:title, :hash_tag, :start_date, :end_date, 
-                                  :location, :is_private, :hide_guestlist)
+                                  :location, :is_private, :hide_guestlist, :asset)
     end
 
     def set_trip

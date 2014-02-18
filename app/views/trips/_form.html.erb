@@ -54,6 +54,11 @@
       <%= f.check_box :hide_guestlist%>
     </div>
     <div>
+      <%= f.label :asset, "File" %>
+      <%= f.file_field :asset %>
+    </div>
+    <hr />
+    <div>
       <div>
         <% if @trip.new_record? %>
           <%= f.submit 'Create'%>

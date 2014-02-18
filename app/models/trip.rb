@@ -8,6 +8,8 @@ class Trip < ActiveRecord::Base
   has_many :permissions, as: :thing
   has_many :polls
   has_many :invitations
+
+  mount_uploader :asset, AssetUploader
   
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })

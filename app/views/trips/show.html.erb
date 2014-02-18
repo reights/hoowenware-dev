@@ -27,6 +27,11 @@
         <% end %>
       <% end %>
     </p>
+    <% if @trip.asset.present? %>
+      <div class='asset'>
+        <%= link_to File.basename(@trip.asset.path), @trip.asset.url %>
+      </div>
+    <% end %>
     <% if user_signed_in? %>
       <% if @trip.user_id == current_user.id or current_user.is_admin? %>
         <%= link_to "Settings", edit_trip_path(@trip) %>
