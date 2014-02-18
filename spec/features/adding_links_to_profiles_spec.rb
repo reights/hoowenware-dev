@@ -8,7 +8,7 @@ feature "Adding Social Links to User Profiles" do
 
   before do
     login_as(user, :scope => :user)
-    visit edit_user_path(user)
+    visit user_path(user)
   end
 
   after do
@@ -17,10 +17,9 @@ feature "Adding Social Links to User Profiles" do
   end
 
   scenario 'adding a link' do
-    within '#link-form' do
-      fill_in 'Link:', with: 'http://www.somenetwork.com/someuser'
-      click_link_or_button 'Add'
-    end
+    click_link_or_button 'Add a link'
+    fill_in 'Link:', with: 'http://www.somenetwork.com/someuser'
+    click_link_or_button 'Add'
 
     expect(page).to have_content('http://www.somenetwork.com/someuser')
   end

@@ -28,7 +28,7 @@
 
     <div>
       <%= f.label :groups, 'Groups:' %>
-      <%= select_tag ':groups', options_from_collection_for_select(@active_groups, :id, :name, @membership_ids), { :multiple => true, :size => 5 } %>
+      <%= select_tag 'groups[]', options_from_collection_for_select(@active_groups, :id, :name, @membership_ids), { :multiple => true, :size => 5 } %>
     </div>
 
     <div>
@@ -91,20 +91,3 @@
 
   <% end %>
   <hr />
-  <h4> Add your social urls </h4>
-  <% if @user.has_links?  %>
-    <% @user.links.each do |web_link| %>
-      <% if web_link.id %>
-        <div>
-          <%= link_to 'Delete' , 
-              user_web_link_path(id: web_link.id, user_id: @user.id),
-              method: :delete
-           %> 
-          |
-          <%= link_to web_link.url, web_link.url, :target => "_blank" %>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
-  <br />
-  <%= render "web_links/form", :locals => {:web_link => @web_link} %>

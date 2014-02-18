@@ -59,6 +59,6 @@ HoowenwareDev::Application.routes.draw do
   end
   
   resources :users, only: [:create, :show, :edit, :update] do
-    resources :web_links, only: [:create, :destroy]
+    resources :web_links, only: [:new, :create, :destroy]
   end
 end

@@ -1,35 +1,37 @@
 class UsersController < ApplicationController
   before_action :set_user
-  before_action :get_groups, :only => [:show]
+  before_action :get_groups, :get_trips, :only => [:show, :update]
   before_action :get_active_groups, :get_membership_ids, :only => [:edit, :update]
   before_filter :check_for_cancel, :only => [:update]
 
   def show
     #set_user
-    @trips = Trip.where(user_id: @user.id)
+    @web_link = @user.web_links.build(url: '')
   end
 
   def edit
     #set_user
-    @web_link = @user.web_links.build
   end
 
   def update
     #set_user
-    @web_link = @user.web_links.build(url:'')
     if @user.update(user_params)
-      # This needs to be fixed to remove unselected group      
+      # This needs to be fixed to remove unselected group
+      puts params[:groups]
       if params[:groups]
         params[:groups].each do |id| 
           @group = Group.find(id)
+
           @membership = @group.memberships.build(email: @user.email)
+
           @membership.save
         end
       end
 
       @user.update(profile_updated: true)
+
       flash[:notice] = "Your profile has been updated."
-      render "edit"
+      render "show"
     else
       flash[:alert] = "Your profile has not been updated."
       render "edit"
@@ -59,6 +61,10 @@ class UsersController < ApplicationController
 
     def get_groups
       @groups = Membership.where(:email => @user.email).map {|x| x.group }
+    end
+
+    def get_trips
+      @trips = Trip.where(user_id: @user.id)
     end
 
     def check_for_cancel

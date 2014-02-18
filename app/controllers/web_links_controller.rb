@@ -3,20 +3,19 @@ class WebLinksController < ApplicationController
   before_filter :authenticate_user!, except: [:show]
 
 
+  def new
+    @web_link = @user.web_links.build
+  end
+
   def create
     #set_user
-    # Some hacky bullshit. validation should move to front. needed to pass spec
-    if params[:web_link][:url] != ""
-      @web_link = @user.web_links.build(web_link_params)
-      if @web_link.save
-        flash[:notice] = "Link has been added to profile."
-        redirect_to edit_user_path(@user)
-      else
-        flash[:alert] = "Link has not been added to profile."
-        redirect_to edit_user_path(@user)
-      end
+    @web_link = @user.web_links.build(web_link_params)
+    if @web_link.save
+      flash[:notice] = "Link has been added to profile."
+      redirect_to user_path(@user)
     else
-      redirect_to edit_user_path(@user)
+      flash[:alert] = "Link has not been added to profile."
+      redirect_to user_path(@user)
     end
   end
 
@@ -25,10 +24,10 @@ class WebLinksController < ApplicationController
     if @user.id == @web_link.user_id
       @web_link.destroy
       flash[:notice] = "Link has been removed."
-      redirect_to edit_user_path(@user)
+      redirect_to user_path(@user)
     else
       flash[:alert] = "You must be the account owner to do that."
-      redirect_to edit_user_path(@user)
+      redirect_to user_path(@user)
     end
   end
 
