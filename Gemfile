@@ -29,11 +29,13 @@ end
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'unicorn'
-gem 'devise'
-gem 'american_date'
+gem 'devise', '~> 3.2.2'
+gem 'american_date', '~> 1.1.0'
 gem 'faker'
-gem 'cancan'
-gem 'carrierwave'
+gem 'cancan', '~> 1.6.10'
+gem 'carrierwave', '~> 0.9.0'
+gem 'nokogiri', '~> 1.5.0'
+gem 'fog', '~> 1.3.1'
 
 gem 'omniauth-facebook', '~> 1.5.1'
 gem 'omniauth-twitter', '~> 1.0.1'
@@ -56,11 +58,11 @@ gem 'http_monkey'
 gem 'rails_12factor', group: :production
 
 group :test, :development do
-  gem 'rspec-rails', "~> 2.14"
+  gem 'rspec-rails', '~> 2.14'
 end
 
 group :test do
-  gem 'capybara', "2.1.0"
+  gem 'capybara', '2.1.0'
   gem 'factory_girl_rails', '~> 4.2.1'
   gem 'selenium-webdriver', '~> 2.39.0'
   gem 'database_cleaner', '~> 1.0.1'

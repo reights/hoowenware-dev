@@ -53,10 +53,14 @@
       <%= f.label :hide_guestlist, 'Hide Guestlist?' %>
       <%= f.check_box :hide_guestlist%>
     </div>
-    <div>
-      <%= f.label :asset, "File" %>
-      <%= f.file_field :asset %>
-    </div>
+
+    <% file_count = 0 %>
+    <%= f.fields_for :assets do |asset| %>
+      <div>
+        <%= asset.label :asset, "File ##{file_count += 1}" %>
+        <%= asset.file_field :asset %>
+      </div>
+    <% end %>
     <hr />
     <div>
       <div>

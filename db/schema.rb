@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218212433) do
+ActiveRecord::Schema.define(version: 20140219042228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "assets", force: true do |t|
+    t.string   "asset"
+    t.integer  "trip_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -120,7 +127,6 @@ ActiveRecord::Schema.define(version: 20140218212433) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "asset"
   end
 
   add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
@@ -157,7 +163,7 @@ ActiveRecord::Schema.define(version: 20140218212433) do
 
   create_table "web_links", force: true do |t|
     t.integer  "user_id"
-    t.string   "url"
+    t.string   "url",        default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

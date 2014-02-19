@@ -27,9 +27,14 @@
         <% end %>
       <% end %>
     </p>
-    <% if @trip.asset.present? %>
-      <div class='asset'>
-        <%= link_to File.basename(@trip.asset.path), @trip.asset.url %>
+    <% if @trip.assets.present? %>
+      <h4>Attached Files:</h4>
+      <div class='assets'>
+      <% @trip.assets.each do |asset| %>
+        <div>
+          <%= link_to File.basename(asset.asset.path), asset.asset.url %>
+        </div>
+      <% end %>
       </div>
     <% end %>
     <% if user_signed_in? %>

@@ -9,7 +9,8 @@ class Trip < ActiveRecord::Base
   has_many :polls
   has_many :invitations
 
-  mount_uploader :asset, AssetUploader
+  has_many :assets
+  accepts_nested_attributes_for :assets
   
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
