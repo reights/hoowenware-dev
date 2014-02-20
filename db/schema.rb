@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140219042228) do
 
   create_table "assets", force: true do |t|
     t.string   "asset"
+    t.string   "content_type"
     t.integer  "trip_id"
     t.datetime "created_at"
     t.datetime "updated_at"

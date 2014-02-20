@@ -2,7 +2,8 @@ class TripsController < ApplicationController
   before_action :authorize_admin!, only: [:destroy]
   before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_trip, only: [:show, :edit, :update, :cancel,
-                                  :reactivate, :preview_invitation, :destroy]
+                                  :reactivate, :add_photo,
+                                  :preview_invitation, :destroy]
   before_filter :check_for_cancel, :only => [:create, :update]
 
   def index
@@ -11,7 +12,7 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    3.times { @trip.assets.build }
+    @trip.assets.build
   end
 
   def create
@@ -26,6 +27,7 @@ class TripsController < ApplicationController
       render "new"
     end
   end
+
 
   def show
     #set_trip
@@ -46,6 +48,10 @@ class TripsController < ApplicationController
       flash[:alert] = "Your trip has not been updated."
       render "edit"
     end
+  end
+
+  def add_photo
+    @trip.assets.build
   end
 
   def cancel

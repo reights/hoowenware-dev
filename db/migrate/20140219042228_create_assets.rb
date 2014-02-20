@@ -1,10 +1,11 @@
 class CreateAssets < ActiveRecord::Migration
-  create_table :assets do |t|
-    t.string :asset
-    t.references :trip
+  def change
+    create_table :assets do |t|
+      t.string :asset
+      t.string :content_type
+      t.references :trip
 
-    t.timestamps
+      t.timestamps
+    end
   end
-
-  remove_column :trips, :asset
 end

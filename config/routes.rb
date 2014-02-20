@@ -1,6 +1,7 @@
 HoowenwareDev::Application.routes.draw do
   root "pages#index"
   
+  resources :files
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :trips do    
     member do
@@ -8,7 +9,7 @@ HoowenwareDev::Application.routes.draw do
       get 'reactivate'
       get 'preview_invitation'
     end
-  
+
     resources :invitations, only: [:new, :create]
     get "invitations/facebook" => 'invitations#facebook',
         :as => 'facebook_invitation'
