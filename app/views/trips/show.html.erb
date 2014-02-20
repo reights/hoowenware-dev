@@ -37,6 +37,10 @@
       <% end %>
       </div>
     <% end %>
+
+    <hr />
+    <%= link_to 'Add a photo', add_photo_to_trip_path(@trip) %>
+
     
     <% if user_signed_in? %>
       <% if @trip.user_id == current_user.id or current_user.is_admin? %>

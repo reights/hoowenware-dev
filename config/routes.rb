@@ -5,6 +5,7 @@ HoowenwareDev::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :trips do    
     member do
+      get 'add_photo', as: 'add_photo_to'
       get 'cancel'
       get 'reactivate'
       get 'preview_invitation'
