@@ -7,18 +7,15 @@ class AssetUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  def guid
-    Time.now.utc.strftime("%Y-%m-%d-%H%M%S")
-  end
   
   def store_dir
     # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    "uploads/trips/#{model.trip.id}/users/#{model.trip.user.id}/#{guid}"
+    "uploads/trips/#{model.trip.id}/users/#{model.trip.user.id}"
   end
 
 
@@ -54,5 +51,14 @@ class AssetUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def filename
+    "#{guid}_#{file.filename}"
+  end
+
+  private
+    def guid
+      Time.now.utc.strftime("%Y%m%d%H%M%S")
+    end
 
 end
