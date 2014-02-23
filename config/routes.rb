@@ -25,6 +25,9 @@ HoowenwareDev::Application.routes.draw do
         get 'locations'
       end
     end
+    
+    resources :posts
+
   end
 
   resources :groups do

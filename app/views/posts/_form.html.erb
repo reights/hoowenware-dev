@@ -1,0 +1,24 @@
+  <%= form_for [@trip, @post], html: {multipart: true, id: 'new_post_form' } do |f| %>
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:
+        </h4>
+        <ul>
+          <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="trip-post">
+      <div>
+        <%= f.label :message, "Message:" %>
+        <%= f.text_area :message %>
+      </div>
+      <div>
+        <%= f.submit "Submit" %>
+        <%= button_tag "Reset", type: :reset%>
+      </div>
+    </div>
+  <% end %>

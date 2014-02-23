@@ -32,6 +32,7 @@ class TripsController < ApplicationController
     @invitations = @trip.invitations
     if current_user
       @rsvp = @trip.rsvps.where(:user_id => current_user.id).first
+      @post = @trip.posts.build(:user_id => current_user.id)
     end
   end
 
@@ -94,7 +95,7 @@ class TripsController < ApplicationController
 
 
   def rsvp
-    @rsvp = @trip.rsvps.where(:user_id => current_user.id).first_or_create
+    @rsvp = @trip.rsvps.where(:user_id => current_user.id, :response => "").first_or_create
     responses = ['yes','maybe', 'no']
     if ['yes','maybe', 'no'].include? params[:response]
       if @rsvp.update(:response => params[:response])

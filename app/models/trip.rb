@@ -14,6 +14,7 @@ class Trip < ActiveRecord::Base
 
   has_many :rsvps,        :dependent => :destroy
 
+  has_many :posts,        :dependent => :destroy
 
   
   scope :viewable_by, ->(user) do

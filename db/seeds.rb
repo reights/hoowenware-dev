@@ -1,10 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Seeds file for development
+# Takes time to run, generates 20 trips, with a random number of invitees,
+# attendees, decliners and undecided users
+# Alvaro, Muir, @alvaromuir
 
 
 require 'faker'
@@ -33,16 +30,15 @@ lampkin = User.new(:first_name => 'Stephanie',
 
 lampkin.save!
 
-Trip.create(:title => 'Hoowenware Launch Party',
-            :location => 'Oranjestad, Aruba',
-            :start_date => '05/15/14',
-            :end_date => '05/16/14',
-            :hash_tag => '#hooWenWare',
-            :user_id => lampkin.id)
+lampkin_trip = Trip.create(:title => 'Hoowenware Launch Party',
+                          :location => 'Oranjestad, Aruba',
+                          :start_date => '05/15/14',
+                          :end_date => '05/16/14',
+                          :hash_tag => '#hooWenWare',
+                          :user_id => lampkin.id)
+lampkin_trip.save!
 
-
-# Users and Trips
-30.times do
+def create_user
   user = User.new
   user.first_name = Faker::Name.first_name
   user.last_name = Faker::Name.last_name
@@ -61,7 +57,10 @@ Trip.create(:title => 'Hoowenware Launch Party',
   user.roommate_pref = ['none','any','single female', 'single male','group females','group males'].sample
 
   user.save!
+  return user
+end
 
+def create_trip(user)
   subject = [Faker::Company.name, Faker::Address.city, Faker::Company.catch_phrase].sample
   predicate = ['Company Retreat', 'Ski Trip', 'Boat Ride', 'Music Festival', 
                 'Seminar', 'Annual Converence', 'Reunion', 'Chartity Tournament', 
@@ -81,14 +80,41 @@ Trip.create(:title => 'Hoowenware Launch Party',
   trip.user_id = user.id
 
   trip.save!
+  return trip
 end
 
-# Groups
-groups = ['Kentucky U. Wildcats Alumn', 'Doctors Without Borders', 'Wine Country Lovers',
-          'Traveling Photographers', 'Start-Up Junkies' ]
-groups.each do |g|
-  Group.create name: g
+def generate_invites(trip, count)
+  count.times {
+    @user = create_user
+    trip.invitations.build(user_id:@user.id, email: @user.email, 
+                            full_name: @user.full_name, avatar: @user.avatar).save!
+  }
 end
+
+def generate_rsvps(trip, count, answer)
+  count.times {
+    @user = create_user
+    trip.rsvps.build(user_id:@user.id, response: answer).save!
+  }
+end
+
+# Trips, Invitations & RSVPs
+15.times do
+  @trip = create_trip(create_user)
+  generate_invites(@trip, rand(3..10))
+  generate_rsvps(@trip, rand(3..7), 'yes')
+  generate_rsvps(@trip, rand(2..5), 'maybe')
+  generate_rsvps(@trip, rand(1..4), 'no')
+end
+
+  generate_invites(lampkin_trip, rand(7..20))
+  generate_rsvps(lampkin_trip, rand(3..11), 'yes')
+  generate_rsvps(lampkin_trip, rand(3..11), 'maybe')
+  generate_rsvps(lampkin_trip, rand(3..11), 'no')
+
+# Groups
+['Kentucky U. Wildcats Alumn', 'Doctors Without Borders', 'Wine Country Lovers',
+  'Traveling Photographers', 'Start-Up Junkies' ].each { |g| Group.create(name: g)}
 
 
 # Memberships
@@ -116,9 +142,9 @@ def add_members_to(group, users, starting_index=0)
   end
 end
 
-
 dev_users = User.all
 dev_groups = Group.all
 add_members_to(dev_groups, dev_users, 1)
+
 
 puts "Database seeded with test data."

@@ -81,7 +81,7 @@
       <div>
         Not Going
         <div class='not-going'>
-          <% @trip.rsvps.where(:response => 'declined').each do |declined| %>
+          <% @trip.rsvps.where(:response => 'no').each do |declined| %>
           <div>
             <%= link_to declined.user, user_path(declined.user) %>
           </div>
@@ -90,10 +90,26 @@
       </div>
     </div>
     
-
     <hr />
+    <% if @trip.posts.count > 0 %>
+      <% @trip.posts.each do |post| %>
+      <% if post.persisted? %>
+        <div class='user-post'>
+          <small>
+            On <%= post.updated_at.to_s.to_date %> <%= link_to post.user, user_path(post.user) %> said:
+          </small>
+          <%= simple_format(post.message) %>
+        </div>
+        <% end %>
+      <% end %>
+    <% end %>
     <%= link_to 'Add a photo', add_photo_to_trip_path(@trip) %>
 
+    <hr />
+    <h4> Add a post </h4>
+    <% if user_signed_in? %>
+    <%= render partial: "posts/form" %>
+    <% end  %>
     
     <% if user_signed_in? %>
       <% if @trip.user_id == current_user.id or current_user.is_admin? %>
