@@ -1,9 +1,7 @@
 class TripsController < ApplicationController
   before_action :authorize_admin!, only: [:destroy]
   before_filter :authenticate_user!, except: [:show, :index]
-  before_action :set_trip, only: [:show, :edit, :update, :cancel,
-                                  :reactivate, :add_photo,
-                                  :preview_invitation, :destroy]
+  before_action :set_trip, except: [:index, :new, :create]
   before_filter :check_for_cancel, :only => [:create, :update]
 
   def index
@@ -32,6 +30,9 @@ class TripsController < ApplicationController
   def show
     #set_trip
     @invitations = @trip.invitations
+    if current_user
+      @rsvp = @trip.rsvps.where(:user_id => current_user.id).first
+    end
   end
 
   def edit
@@ -91,6 +92,23 @@ class TripsController < ApplicationController
     redirect_to trips_path
   end
 
+
+  def rsvp
+    @rsvp = @trip.rsvps.where(:user_id => current_user.id).first_or_create
+    responses = ['yes','maybe', 'no']
+    if ['yes','maybe', 'no'].include? params[:response]
+      if @rsvp.update(:response => params[:response])
+        flash[:notice] = "Your rsvp has been updated."
+        redirect_to @trip
+      else
+        flash[:alert] = "Your rsvp has not been updated."
+        redirect_to @trip
+      end
+    else
+      flash[:alert] = "Your rsvp response was invalid."
+      redirect_to @trip
+    end
+  end
 
   private
     def trip_params

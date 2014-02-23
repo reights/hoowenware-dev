@@ -5,12 +5,16 @@ class Trip < ActiveRecord::Base
   validates :location,    :presence => true
 
   belongs_to :user
-  has_many :permissions, as: :thing
-  has_many :polls
-  has_many :invitations
+  has_many :permissions,  as: :thing
+  has_many :polls,        :dependent => :destroy
+  has_many :invitations,  :dependent => :destroy
 
   has_many :assets
   accepts_nested_attributes_for :assets
+
+  has_many :rsvps,        :dependent => :destroy
+
+
   
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
@@ -36,6 +40,10 @@ class Trip < ActiveRecord::Base
     return false
   end
 
+  def user_rsvp(user)
+    return self.rsvps.where(:user_id => user.id).first
+  end
+  
   def location_polls
     return self.polls.where(:poll_type => 'location')
   end

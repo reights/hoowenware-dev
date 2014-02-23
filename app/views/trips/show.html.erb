@@ -38,6 +38,59 @@
       </div>
     <% end %>
 
+    <h4>Are you in?<h4>
+    <div class="rsvp">
+      <% if @rsvp && @rsvp.response == 'yes' %>
+        Yes
+      <% else %>
+        <%= link_to 'Yes',  rsvp_to_trip_path(:response => 'yes') %>
+      <% end %> |
+      <% if @rsvp && @rsvp.response =='no' %>
+        No
+      <% else %>
+        <%= link_to 'No',  rsvp_to_trip_path(:response => 'no') %>
+      <% end %> |
+      <% if @rsvp && @rsvp.response == 'maybe' %>
+        Maybe
+      <% else %>
+        <%= link_to 'Maybe',  rsvp_to_trip_path(:response => 'maybe') %>
+      <% end %>
+    </div>
+
+    <div class="responses">
+      <div>
+        Going
+        <div class='going'>
+          <% @trip.rsvps.where(:response => 'yes').each do |attending| %>
+          <div>
+            <%= link_to attending.user, user_path(attending.user) %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        Maybe
+        <div class='maybe-going'>
+          <% @trip.rsvps.where(:response => 'maybe').each do |undecided| %>
+          <div>
+            <%= link_to undecided.user, user_path(undecided.user) %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        Not Going
+        <div class='not-going'>
+          <% @trip.rsvps.where(:response => 'declined').each do |declined| %>
+          <div>
+            <%= link_to declined.user, user_path(declined.user) %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+
     <hr />
     <%= link_to 'Add a photo', add_photo_to_trip_path(@trip) %>
 

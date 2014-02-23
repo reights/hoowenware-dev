@@ -6,6 +6,7 @@ HoowenwareDev::Application.routes.draw do
   resources :trips do    
     member do
       get 'add_photo', as: 'add_photo_to'
+      get 'rsvp', as: 'rsvp_to'
       get 'cancel'
       get 'reactivate'
       get 'preview_invitation'
