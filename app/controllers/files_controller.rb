@@ -1,5 +1,5 @@
 class FilesController < ApplicationController
-
+  before_filter :authenticate_user!, only: [:new]
   def new
     @trip  = Trip.new
     asset = @trip.assets.build

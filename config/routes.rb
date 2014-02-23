@@ -27,6 +27,7 @@ HoowenwareDev::Application.routes.draw do
     end
     
     resources :posts
+    resources :activities
 
   end
 

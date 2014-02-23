@@ -27,16 +27,6 @@
         <% end %>
       <% end %>
     </p>
-    <% if @trip.assets.present? %>
-      <h4>Attached Files:</h4>
-      <div class='assets'>
-      <% @trip.assets.each do |asset| %>
-        <div>
-          <%= link_to File.basename(asset.asset.path), asset.asset.url %>
-        </div>
-      <% end %>
-      </div>
-    <% end %>
 
     <h4>Are you in?<h4>
     <div class="rsvp">
@@ -91,6 +81,7 @@
     </div>
     
     <hr />
+    <h4> Posts </h4>
     <% if @trip.posts.count > 0 %>
       <% @trip.posts.each do |post| %>
       <% if post.persisted? %>
@@ -102,14 +93,55 @@
         </div>
         <% end %>
       <% end %>
+    <% else %>
+    No user posts yet ... <br />
     <% end %>
-    <%= link_to 'Add a photo', add_photo_to_trip_path(@trip) %>
+    <% if user_signed_in? %>
+    add a post
+    <%= render partial: "posts/form" %>
+    <% else %>
+    <%= link_to 'Sign in to add a post', new_user_session_path %>
+    <% end  %>
 
     <hr />
-    <h4> Add a post </h4>
+    <h4> Files &amp; Photos </h4>
+    <% if @trip.assets.present? %>
+      <div class='assets'>
+      <% @trip.assets.each do |asset| %>
+        <div>
+          <%= link_to File.basename(asset.asset.path), asset.asset.url %>
+        </div>
+      <% end %>
+      </div>
+    <% else %>
+    No files or photos yet...<br />
+    <% end %>
     <% if user_signed_in? %>
-    <%= render partial: "posts/form" %>
+    <%= link_to 'Add a photo', add_photo_to_trip_path(@trip) %>
+    <% else %>
+    <%= link_to 'Sign in to add a file or photo', new_user_session_path %>
     <% end  %>
+
+    <hr />
+    <h4> Activities </h4>
+    <% if @trip.activities.count > 0 %>
+    <% @trip.activities.each do |activity| %>
+    <div>
+      <%= link_to activity, trip_activity_path(:id => activity.id,
+                                              :trip_id => @trip.id) %> with 
+      <%= link_to activity.user, user_path(activity.user.id) %> on <%= activity.date %>
+    
+    </div>
+    <% end %>
+    <% else %>
+    No submitted activities yet...<br />
+    <% end %> 
+    <% if user_signed_in? %>
+    <%= link_to 'Submit an activity', new_trip_activity_path(@trip.id) %>
+    <% else %>
+    <%= link_to 'Sign in to submit an activity', new_user_session_path %>
+    <% end  %>
+
     
     <% if user_signed_in? %>
       <% if @trip.user_id == current_user.id or current_user.is_admin? %>

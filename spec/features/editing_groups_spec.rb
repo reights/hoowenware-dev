@@ -24,7 +24,7 @@ feature 'Editing Groups' do
 
   scenario 'unauthorized users can not edit a groups details' do
     sign_in_as!(user2)
-    visit "/groups/#{group.id}/edit"
+    visit edit_group_path(group.id)
     expect(page).to have_content('You cannot edit memberships on this group.')
   end
 end

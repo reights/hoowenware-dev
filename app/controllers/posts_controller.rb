@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_trip
+  before_filter :authenticate_user!
+
 
   def create
     @post = @trip.posts.build(:user_id => current_user.id, 

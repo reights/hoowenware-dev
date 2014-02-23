@@ -1,9 +1,8 @@
 class MembershipsController < ApplicationController
-  before_filter :authenticate_user!
   before_action :set_group
   before_action :set_membership, only: [:approve, :pend, :promote, :demote,
                                         :remove]
-
+  before_filter :authenticate_user!
 
   def new
     #set_group

@@ -2,7 +2,9 @@ class UsersController < ApplicationController
   before_action :set_user
   before_action :get_groups, :get_trips, :only => [:show, :update]
   before_action :get_active_groups, :get_membership_ids, :only => [:edit, :update]
+  before_filter :authenticate_user!, except: [:show]
   before_filter :check_for_cancel, :only => [:update]
+
 
   def show
     #set_user

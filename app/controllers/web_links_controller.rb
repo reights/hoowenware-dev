@@ -1,8 +1,7 @@
 class WebLinksController < ApplicationController
   before_action :set_user
-  before_filter :authenticate_user!, except: [:show]
-
-
+  before_filter :authenticate_user!
+  
   def new
     @web_link = @user.web_links.build
   end

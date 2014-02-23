@@ -13,8 +13,9 @@
     <% end %>
     <div class="trip-post">
       <div>
+
+        <%= f.text_area :message %><br />
         <%= f.label :message, "Message:" %>
-        <%= f.text_area :message %>
       </div>
       <div>
         <%= f.submit "Submit" %>

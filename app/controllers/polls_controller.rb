@@ -1,9 +1,11 @@
 class PollsController < ApplicationController
   before_action :set_trip
   before_action :set_poll, :only => [:edit, :update, :destroy]
+  before_filter :authenticate_user!
   before_filter :check_for_cancel, :only => [:create, :update]
 
   def dates
+    #set_trip
     @poll = @trip.polls.build
   end
 

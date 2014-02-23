@@ -1,14 +1,13 @@
 class InvitationsController < ApplicationController
   before_action :set_trip
   before_filter :set_invitation, only: [:new, :facebook, :google]
-  before_filter :check_for_cancel, :check_for_delete_selected,
-                :only => [:create]
   before_filter :check_for_facebook_cred, only: [:facebook]
   before_filter :check_for_google_cred, only: [:google]
+  before_filter :authenticate_user!
+  before_filter :check_for_cancel, :check_for_delete_selected,
+                :only => [:create]
 
-  def new
-  end
-  
+
   def create
     if params[:invitation]
       params[:invitation][:email].split(',').each do |email|

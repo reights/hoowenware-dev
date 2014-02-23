@@ -1,11 +1,9 @@
 class GroupsController < ApplicationController
   before_action :authorize_admin!, only: [:deactivate, :reactivate, :destroy]
-  before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_group, only: [:show, :edit, :update, :deactivate,
                                     :reactivate, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
   before_filter :check_for_cancel, :only => [:create, :update]
-  before_action :authorize_update!, only: [:edit, :update]
-
 
   def index
     @groups = Group.order('name ASC')
@@ -40,6 +38,10 @@ class GroupsController < ApplicationController
 
   def edit
     #set_group
+    if ! is_group_admin?(current_user)
+      flash[:alert] = "You cannot edit memberships on this group."
+      redirect_to @group
+    end
   end
 
   def update

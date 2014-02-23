@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   before_action :authorize_admin!, only: [:destroy]
-  before_filter :authenticate_user!, except: [:show, :index]
   before_action :set_trip, except: [:index, :new, :create]
+  before_filter :authenticate_user!, except: [:show, :index]
   before_filter :check_for_cancel, :only => [:create, :update]
 
   def index

@@ -1,0 +1,45 @@
+<h4>Join <%= @activity.user %> on <%= @activity.date.to_date.strftime("%m/%d/%y") %>
+<small>category: <%= @activity.activity_type %></small>
+<br />
+<%= link_to @activity.link %>
+<div>
+  Venue: <%= @activity.venue %>
+</div>
+<div>
+  From <%= @activity.start_time.to_time.strftime("%I:%m%p") %> 
+  until <%= @activity.end_time.to_time.strftime("%I:%m%p") %>
+</div>
+<div class='details'>
+  Details:
+  <div class='notes'>
+  <%= @activity.notes %>
+  </div>
+  <div class='cost'>
+  cost: $<%= @activity.price %>
+  </div>
+  <div class='tickets'>
+  Tickets remaining: <%= @activity.tickets_available %>
+  </div>
+  <div class='deposit-requirements'>
+  Deposit Required: 
+    <% if @activity.deposit_required? %> Yes <% else %> No <% end %>
+  </div>
+  <div class='cc-requirements'> 
+  Credit Card Required: 
+    <% if @activity.cc_required? %> Yes <% else %> No <% end %>
+  </div>
+  <div class='deadline'>
+  Last day to join: $<%= @activity.deadline.to_date.strftime("%m/%d/%y") %>
+  </div>
+  <div class='age-requirements'>
+  Minimum Age: <%= @activity.min_age %>
+  </div>
+</div>
+<hr />
+<div>
+  Address: <%= @activity.address %>
+</div>
+<div>
+  For venue details, contact: <br/>
+  Contact: <%= @activity.contact %>
+</div>

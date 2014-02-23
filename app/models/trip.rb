@@ -13,12 +13,16 @@ class Trip < ActiveRecord::Base
   accepts_nested_attributes_for :assets
 
   has_many :rsvps,        :dependent => :destroy
-
   has_many :posts,        :dependent => :destroy
+  has_many :activities,   :dependent => :destroy
 
   
   scope :viewable_by, ->(user) do
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
+  end
+
+  def to_s
+    return self.title
   end
 
   def has_dates_polls?
