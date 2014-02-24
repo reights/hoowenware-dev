@@ -8,7 +8,7 @@ class CreateActivities < ActiveRecord::Migration
       t.text :address
       t.text :contact
       t.float :price
-      t.date :date,            :null => false,
+      t.date :date,            :null => false
       t.time :start_time
       t.time :end_time
       t.text :notes

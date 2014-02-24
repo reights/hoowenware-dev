@@ -18,14 +18,14 @@ ActiveRecord::Schema.define(version: 20140224054020) do
   enable_extension "hstore"
 
   create_table "activities", force: true do |t|
-    t.string   "activity_type"
+    t.string   "activity_type",     null: false
     t.string   "name"
     t.string   "link"
     t.string   "venue"
     t.text     "address"
     t.text     "contact"
     t.float    "price"
-    t.date     "date"
+    t.date     "date",              null: false
     t.time     "start_time"
     t.time     "end_time"
     t.text     "notes"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140224054020) do
     t.boolean  "deposit_required"
     t.boolean  "cc_required"
     t.integer  "min_age"
+    t.string   "gender"
     t.boolean  "is_active"
     t.boolean  "is_approved"
     t.integer  "approved_by"
