@@ -1,39 +1,57 @@
-<h4>Join <%= @activity.user %> on <%= @activity.date.to_date.strftime("%m/%d/%y") %>
+<h4>Join <%= @activity.user %> on <%= @activity.date.to_date.strftime("%m/%d/%y") %><br />
 <small>category: <%= @activity.activity_type %></small>
 <br />
+<% if @activity.link %>
 <%= link_to @activity.link %>
+<% end %>
+<% if @activity.venue %>
 <div>
   Venue: <%= @activity.venue %>
 </div>
+<% end %>
 <div>
   From <%= @activity.start_time.to_time.strftime("%I:%m%p") %> 
   until <%= @activity.end_time.to_time.strftime("%I:%m%p") %>
 </div>
 <div class='details'>
   Details:
+  <% if @activity.notes %>
   <div class='notes'>
   <%= @activity.notes %>
   </div>
+  <% end %>
+  <% if @activity.price %>
   <div class='cost'>
   cost: $<%= @activity.price %>
   </div>
+  <% end %>
+  <% if @activity.tickets_available %>
   <div class='tickets'>
   Tickets remaining: <%= @activity.tickets_available %>
   </div>
+  <% end %>
+  <% if @activity.deposit_required %>
   <div class='deposit-requirements'>
   Deposit Required: 
     <% if @activity.deposit_required? %> Yes <% else %> No <% end %>
   </div>
+  <% end %>
+  <% if @activity.cc_required %>
   <div class='cc-requirements'> 
   Credit Card Required: 
     <% if @activity.cc_required? %> Yes <% else %> No <% end %>
   </div>
+  <% end %>
+  <% if @activity.deadline %>
   <div class='deadline'>
-  Last day to join: $<%= @activity.deadline.to_date.strftime("%m/%d/%y") %>
+    Last day to join: <%= @activity.deadline.to_date.strftime("%m/%d/%y") %>
   </div>
+  <% end %>
+  <% if @activity.min_age %>
   <div class='age-requirements'>
   Minimum Age: <%= @activity.min_age %>
   </div>
+  <% end %>
 </div>
 <hr />
 <div>
