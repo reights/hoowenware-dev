@@ -1,3 +1,11 @@
+<% if user_signed_in? %> 
+  <% if current_user.id == @activity.user_id or current_user.is_admin? %>
+  <div>
+    <%= link_to "Update this activity", edit_trip_activity_path(:id => @activity.id,
+                                                                :trip_id => @trip.id) %>
+  </div>
+  <% end %>
+<% end %>
 <h4>Join <%= @activity.user %> on <%= @activity.date.to_date.strftime("%m/%d/%y") %><br />
 <small>category: <%= @activity.activity_type %></small>
 <br />

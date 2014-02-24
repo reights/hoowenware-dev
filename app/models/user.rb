@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-
   def self.find_for_facebook_oauth(auth)
     @acct = Authentication.find_for_facebook_oauth(auth)
 

@@ -1,0 +1,81 @@
+  <%= form_for [@trip, @transportation], html: {id: 'new_transportation_form' } do |f| %>
+    <% if @transportation.errors.any? %>
+      <div id="error_explanation">
+        <h4>
+          <%= pluralize(@transportation.errors.count, "error") %> prohibited this transportation from being saved:
+        </h4>
+        <ul>
+          <% @transportation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :transportation_type, 'Travel Type:' %>
+      <%= f.select :transportation_type, [['airline', 'airline'],
+                                    ['bus', 'bus'],['rail', 'rail'],
+                                    ['rental car', 'rental car'],
+                                    ['personal car', 'personal car'],
+                                    ['cruiseline', 'cruiseline'],
+                                    ['ferry', 'ferry'], ['other', 'other']] %>
+    </div>
+    <div>
+      <%= f.label :service_number, 'Service Number:' %>
+      <%= f.text_field :service_number %>
+    </div>
+    <div>
+      <%= f.label :seat_number, 'Seat Number:' %>
+      <%= f.text_field :seat_number %>
+    </div>
+    <div>
+      <%= f.label :price, 'Price:' %>
+      <%= f.text_field :price %>
+    </div>
+    <div>
+      <%= f.label :deposit_required, 'Deposit Required?' %>
+      <%= f.check_box  :deposit_required %>
+    </div>
+    <div>
+      <%= f.label :notes, 'Notes:' %>
+      <%= f.text_area :notes %>
+    </div>
+    <div>
+      <%= f.label :departure_city, 'Departure City:' %>
+      <%= f.text_field :departure_city %>
+    </div>
+    <div>
+      <%= f.label :departure_date, 'Departure Date:' %>
+      <%= f.text_field :departure_date %>
+    </div>
+    <div>
+      <%= f.label :departure_time, 'Departure Time:' %>
+      <%= f.text_field :departure_time %>
+    </div>
+    <div>
+      <%= f.label :arrival_city, 'Arrival City:' %>
+      <%= f.text_field :arrival_city %>
+    </div>
+    <div>
+      <%= f.label :arrival_date, 'Arrival Date:' %>
+      <%= f.text_field :arrival_date %>
+    </div>
+    <div>
+      <%= f.label :arrival_time, 'Arrival Time:' %>
+      <%= f.text_field :arrival_time %>
+    </div>
+
+    <hr />
+
+    <div>
+      <div>
+        <% if @transportation.new_record? %>
+          <%= f.submit 'Create'%>
+        <% else %>
+          <%= f.submit 'Update'%>
+        <% end %>
+        <%= button_tag "Reset", type: :reset%>
+        <%= f.submit "Cancel"%>
+      </div>
+    </div>
+  <% end %>

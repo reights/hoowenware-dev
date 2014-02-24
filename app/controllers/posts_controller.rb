@@ -18,6 +18,10 @@ class PostsController < ApplicationController
 
   private
 
+    def post_params
+      params.require(:post).permit(:message)
+    end
+
     def set_trip
       @trip = Trip.find(params[:trip_id])
     end
@@ -27,9 +31,5 @@ class PostsController < ApplicationController
    rescue ActiveRecord::RecordNotFound
      flash[:alert] = "The post you were looking for could not be found."
      redirect_to @trip
-    end
-    
-    def post_params
-      params.require(:post).permit(:message)
     end
 end

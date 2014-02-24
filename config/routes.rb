@@ -26,8 +26,9 @@ HoowenwareDev::Application.routes.draw do
       end
     end
     
-    resources :posts
+    resources :posts, only: [:create]
     resources :activities
+    resources :transportations
 
   end
 

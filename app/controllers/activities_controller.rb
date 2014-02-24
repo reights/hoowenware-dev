@@ -22,6 +22,30 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    # set_activity
+  end
+
+  def edit
+    # set_activity
+    if current_user.id != @activity.user_id
+      flash[:alert] = "You cannot make changes to this trip."
+      redirect_to @trip
+    end
+  end
+
+  def update
+    if current_user.id == @activity.user_id
+      if @activity.update(activity_params)
+        flash[:notice] = "Your activity details have been updated."
+        redirect_to @trip
+      else
+        flash[:notice] = "Your activity details have not been updated."
+        render "edit"
+      end
+    else
+      flash[:alert] = "You cannot make changes to this activity."
+      redirect_to @trip
+    end
   end
 
   private
@@ -39,7 +63,7 @@ class ActivitiesController < ApplicationController
     end
 
     def set_activity
-      @activity = Activity.find(params[:id])
+      @activity = @trip.activities.find(params[:id])
     rescue ActiveRecord::RecordNotFound
      flash[:alert] = "The activity you were looking for could not be found."
      redirect_to @trip

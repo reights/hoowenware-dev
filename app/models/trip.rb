@@ -15,6 +15,7 @@ class Trip < ActiveRecord::Base
   has_many :rsvps,        :dependent => :destroy
   has_many :posts,        :dependent => :destroy
   has_many :activities,   :dependent => :destroy
+  has_many :transportations, :dependent => :destroy
 
   
   scope :viewable_by, ->(user) do
@@ -51,6 +52,10 @@ class Trip < ActiveRecord::Base
   
   def location_polls
     return self.polls.where(:poll_type => 'location')
+  end
+
+  def travel_arrangements(user)
+    return self.transportations.where(:user_id => user.id)
   end
 
 end

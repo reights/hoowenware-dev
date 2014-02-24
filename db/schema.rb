@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223202151) do
+ActiveRecord::Schema.define(version: 20140224054020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,6 +166,28 @@ ActiveRecord::Schema.define(version: 20140223202151) do
 
   add_index "rsvps", ["trip_id"], name: "index_rsvps_on_trip_id", using: :btree
   add_index "rsvps", ["user_id"], name: "index_rsvps_on_user_id", using: :btree
+
+  create_table "transportations", force: true do |t|
+    t.string   "transportation_type"
+    t.string   "service_number"
+    t.string   "seat_number"
+    t.float    "price"
+    t.boolean  "deposit_required"
+    t.text     "notes"
+    t.string   "departure_city"
+    t.date     "departure_date"
+    t.time     "departure_time"
+    t.string   "arrival_city"
+    t.date     "arrival_date"
+    t.time     "arrival_time"
+    t.integer  "trip_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transportations", ["trip_id"], name: "index_transportations_on_trip_id", using: :btree
+  add_index "transportations", ["user_id"], name: "index_transportations_on_user_id", using: :btree
 
   create_table "trips", force: true do |t|
     t.string   "title",          default: "",    null: false
