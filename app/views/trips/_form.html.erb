@@ -1,4 +1,5 @@
-  <%= form_for @trip, html: {multipart: true, id: 'new_trip_form' } do |f| %>
+
+  <%= form_for @trip, html: {multipart: true, id: 'new_trip_form', :class=>"col-md-6" } do |f| %>
     <% if @trip.errors.any? %>
       <div id="error_explanation">
         <h4>
@@ -11,22 +12,22 @@
         </ul>
       </div>
     <% end %>
-    <div>
+    <div class="form-group">
       <%= f.label :title, 'Trip Title:' %>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, :class=>"form-control" %>
     </div>
     <div>
       <%= f.label :hash_tag, 'Hashtag:' %>
-      <%= f.text_field :hash_tag%>
+      <%= f.text_field :hash_tag, :class=>"form-control"%>
     </div>
-    <div class="new-trip-dates">
-      <div>
+    <div class="new-trip-dates row">
+      <div class="form-group col-xs-5">
         <%= f.label :start_date, 'Start:' %>
-        <%= f.text_field :start_date %>
+        <%= f.text_field :start_date , :class=>"form-control"%>
       </div>
-      <div>
+      <div class="form-group col-xs-5">
         <%= f.label :end_date, 'End:' %>
-        <%= f.text_field :end_date %>
+        <%= f.text_field :end_date , :class=>"form-control"%>
       </div>
       <span class="new-date-poll">
         <% if ! @trip.new_record? %>
@@ -34,10 +35,10 @@
         <% end %>
       </span>
     </div>
-    <div class="new-trip-location">
+    <div class="new-trip-location form-group">
       <div>
         <%= f.label :location, 'Location:' %>
-        <%= f.text_field :location %>
+        <%= f.text_field :location, :class=>"form-control" %>
       </div>
       <span class="new-location-poll">
         <% if ! @trip.new_record? %>
@@ -45,11 +46,11 @@
         <% end %>
       </span>
     </div>
-    <div>
+    <div class="form-group">
       <%= f.label :is_private, 'Privacy:' %>
-      <%= f.select :is_private, [['private', true], ['public', false]] %>
+      <%= f.select :is_private, [['private', true], ['public', false]] , :class=>"form-control"%>
     </div>
-    <div>
+    <div class="checkbox">
       <%= f.label :hide_guestlist, 'Hide Guestlist?' %>
       <%= f.check_box :hide_guestlist%>
     </div>
@@ -64,12 +65,12 @@
     <div>
       <div>
         <% if @trip.new_record? %>
-          <%= f.submit 'Create'%>
+          <%= f.submit 'Create',:class=>"btn btn-success" %>
         <% else %>
-          <%= f.submit 'Update'%>
+          <%= f.submit 'Update',:class=>"btn btn-success" %>
         <% end %>
-        <%= button_tag "Reset", type: :reset%>
-        <%= f.submit "Cancel"%>
+        <%= button_tag "Reset", type: :reset,:class=>"btn btn-warning   " %>
+        <%= f.submit "Cancel",:class=>"btn btn-danger" %>
       </div>
     </div>
   <% end %>
