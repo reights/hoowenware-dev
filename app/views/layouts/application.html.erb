@@ -9,11 +9,17 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-  <% flash.each do |key, value| %>
-  <div class='flash' id='<%= key %>'>
-    <%= value %>
+  <div class="container">
+    <div class="row"> 
+      <% flash.each do |key, value| %>
+  
+      <div class='flash center-block alert alert-warning alert-dismissable' style="width:50%" id='<%= key %>'>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= value %>
+      </div>
+      <% end %>
+   </div>
   </div>
-  <% end %>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -58,11 +64,9 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
+
       <%= yield %>
-    </div>
-  </div>
+ 
   <script src="//netdna.bootstrapcdn.com/bootstrap/<%= bootstrap_version %>/js/bootstrap.min.js"></script>
   </body>
 </html>

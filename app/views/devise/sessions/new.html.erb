@@ -1,23 +1,30 @@
-<h2>Sign in</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <h2>Sign in</h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name),html: {class: 'sign_in', id: 'sign_in_form' }) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),html: {class: 'sign_in', id: 'sign_in_form' }) do |f| %>
+      <div class="form-group"><%= f.label :email %><br />
+        <%= f.email_field :email, :autofocus => true, :class=>"form-control"  %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+      <div class="form-group"><%= f.label :password %><br />
+        <%= f.password_field :password, :class=>"form-control"  %></div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+      <% if devise_mapping.rememberable? -%>
+        <div class="form-group"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+      <% end -%>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
-<hr />
-<p>
-  Or sign in with:<br />
-  <%= link_to "Facebook", user_omniauth_authorize_path(:facebook) %>
-  <%= link_to "Google", user_omniauth_authorize_path(:google) %>
-</p>
+      <div><%= f.submit "Sign in",:class=>"btn btn-primary" %></div>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-md-6 col-md-offset-2">
+      
+        <h3>Or sign in with:</h3>
+        <%= link_to "Facebook", user_omniauth_authorize_path(:facebook) %>
+        <%= link_to "Google", user_omniauth_authorize_path(:google) %>
+      
 
 <!-- <%= render "devise/shared/links" %> -->
+    </div>
+  </div>
+</div>
